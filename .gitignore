@@ -28,6 +28,7 @@ nbdist/
 # User-specific stuff:
 .idea/workspace.xml
 .idea/tasks.xml
+bob.xml
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
