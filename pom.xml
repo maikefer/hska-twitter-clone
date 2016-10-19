@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>twitter-clone</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Preject for 'destributed-systems-2'</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
