@@ -8,7 +8,7 @@
 \usepackage[pdftex]{graphicx}
 \usepackage[TS1, T1]{fontenc}
 \usepackage{palatino} % Schriftart
-
+\usepackage{parskip} %Erste Zeile eines Paragrafen nicht einrücken
 
 \begin{document}
     \sffamily % Whole document sans-serif
@@ -52,6 +52,45 @@
     
     \section{Datenmodell}
     
+    \subsection*{Globale Zähler}
+		\begin{enumerate}
+			\item \textit{next\_user\_id} {Zähler für die nächste zu vergebende User ID}
+			\item \textit{next\_post\_id} {Zähler für die nächste zu vergebende Post ID}
+		\end{enumerate}
+	
+	\subsection*{Users}
+		Für die User wird eine HashMap angelegt, die dem Namensschema \textit{user:[user\_id]} folgt. Die nächste ID bekommt man über \textit{INCR next\_user\_id}. \\
+		Die HashMap hat folgende Felder:
+		\begin{enumerate}
+			\item \textit{username} {Der Name des Users}
+			\item \textit{password} {Das Passwort des Users(hashed + salted)}
+			\item \textit{auth} {Authentifizierungs-Token des Nutzers}			
+		\end{enumerate}
+		
+		Wenn ein User angelegt wird, so muss dessen ID in dem HashSet \textit{users} hinzugefügt werden, z.B: \textit{HSET users essigt 1000}\\
+		
+		Zudem muss der Authentifizierungs-Token des Nutzers mit der User-ID verknüpft werden, dies wird in dem HashSet \textit{auths} hinterlegt. \\
+		
+		Um zu speichern, wem der User folgt, bzw. von wem er gefolgt wird, werden pro User zwei Sets benötigt:
+		\begin{enumerate}
+			\item followers:1000 {Die User-IDs die dem Benutzer 1000 folgen}
+			\item following:1000 {Die User-IDs denen der Benutzer 1000 folgt}
+		\end{enumerate}
+
+	
+	\subsection*{Posts}
+		Für die Posts wird eine HashMap angelegt, die dem Namensschema \textit{post:[post\_id]} folgt. Die nächste ID bekommt man über \textit{INCR next\_post\_id}. \\
+		Die HashMap hat folgende Felder:
+		\begin{enumerate}
+			\item \textit{user\_id} {Die User-ID des Erstellers}
+			\item \textit{timestamp} {Der Zeitstempel im Unix-Zeitformat}
+			\item \textit{message} {Der Text des Posts}
+		\end{enumerate}
+		
+		Wenn ein neuer Post angelegt wird, muss dessen ID in die Liste \textit{posts} hinzugefügt werden. Beispiel: \textit{ LPUSH [post\_id]} \\
+		Zudem muss der Post zu jeder Timeline der Follower und zu der Timeline des Erstellers hinzugefügt werden.
+		Für jeden User gibt es daher eine Liste \textit{timeline:[user\_id]}.
+	
 
     % Aufgabe 2
 %    \chapter{Seitenbasierte Implementierung}
