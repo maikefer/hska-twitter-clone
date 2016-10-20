@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>twitter-clone</name>
-	<description>Preject for 'destributed-systems-2'</description>
+	<description>Project for 'destributed-systems-2'</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -43,7 +43,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!--WebJars -->
 		<dependency>
 			<groupId>org.webjars</groupId>
