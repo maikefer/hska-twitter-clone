@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div class="mdl-card mdl-shadow--2dp timeline-card" th:fragment="timeline">
+    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+        <div class="mdl-tabs__tab-bar">
+            <a href="#global" class="mdl-tabs__tab is-active">Global Timeline</a>
+            <a href="#private" class="mdl-tabs__tab">Private Timeline</a>
+            <a href="#user" class="mdl-tabs__tab">Timeline</a>
+        </div>
+
+        <div class="mdl-tabs__panel is-active" id="global">
+            <ul>
+                <li>Eddard</li>
+                <li>Catelyn</li>
+                <li>Robb</li>
+                <li>Sansa</li>
+                <li>Brandon</li>
+                <li>Arya</li>
+                <li>Rickon</li>
+            </ul>
+        </div>
+
+        <div class="mdl-tabs__panel" id="private">
+            <ul>
+                <li>Tywin</li>
+                <li>Cersei</li>
+                <li>Jamie</li>
+                <li>Tyrion</li>
+            </ul>
+        </div>
+
+        <div class="mdl-tabs__panel" id="user">
+            <ul>
+                <li>Tywin</li>
+                <li>Cersei</li>
+                <li>Jamie</li>
+                <li>Tyrion</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</html>

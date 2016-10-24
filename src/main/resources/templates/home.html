@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Home</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen" />-->
+    <link th:href="@{/webjars/material-design-lite/1.2.0/material.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/main.css}" href="../static/css/main.css" rel="stylesheet" />
+    <link th:href="@{/css/home.css}" href="../static/css/home.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <!--navbar-->
+        <div th:replace="components/header :: header">...</div>
+
+        <main class="mdl-layout__content">
+
+            <!--main content-->
+            <div class="page-content">
+                <div class="mdl-grid">
+                    <!--Spacer-->
+                    <div class="mdl-cell mdl-cell--1-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+
+                    <!--Profile-->
+                    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone">
+                        <div th:replace="components/profile :: card">...</div>
+                    </div>
+
+                    <!--Timeline-->
+                    <div class="mdl-cell mdl-cell--6-col mdl-cell--5-col-tablet mdl-cell--4-col-phone timeline">
+                        <div class="mdl-card mdl-shadow--2dp new-message-card">
+                            TODO: new tweet card
+                        </div>
+
+                        <div th:replace="components/timeline :: timeline">...</div>
+                    </div>
+
+                    <!--Spacer-->
+                    <div class="mdl-cell mdl-cell--3-col mdl-cell--1-col-tablet mdl-cell--hide-phone"></div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+    <!--<script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>-->
+    <script th:src="@{/webjars/material-design-lite/1.2.0/material.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/js/home.js}"></script>
+</body>
+
+</html>
