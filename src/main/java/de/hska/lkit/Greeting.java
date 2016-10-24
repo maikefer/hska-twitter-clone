@@ -1,5 +1,6 @@
 package de.hska.lkit;
 
+
 public class Greeting {
 
     private String name;
@@ -22,11 +23,11 @@ public class Greeting {
         this.content = content;
     }
 
-	public boolean isBootstrap() {
-		return bootstrap;
-	}
+    public boolean isBootstrap() {
+        return bootstrap;
+    }
 
-	public void setBootstrap(boolean bootstrap) {
-		this.bootstrap = bootstrap;
-	}    
+    public void setBootstrap(boolean bootstrap) {
+        this.bootstrap = bootstrap;
+    }
 }
