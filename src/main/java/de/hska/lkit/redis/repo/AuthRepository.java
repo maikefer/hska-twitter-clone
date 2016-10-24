@@ -18,6 +18,21 @@ public class AuthRepository {
 
 	
 	/**
+	 * Checks if the auth-token is vaild
+	 * TODO: Usefull to return the uid instead of a boolean value?
+	 * @param auth
+	 * @return
+	 */
+	public boolean authValid(String auth) {
+		String uid = template.opsForValue().get("auth:" + auth + ":uid");
+		if(uid == null) { //No valid Auth found
+			return false;
+		} else {
+			return true;
+		}		
+	}
+	
+	/**
 	 * Checks if the username and password are correct
 	 * @param uname
 	 * @param pass
