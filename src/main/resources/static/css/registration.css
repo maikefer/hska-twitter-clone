@@ -1,0 +1,27 @@
+.padding-box {
+	padding: 20px;
+	background: rgba(255, 255, 255, 0.8);
+}
+
+.centering-box {
+	margin: 0px auto;
+	width: 60%;
+}
+
+.hundred-percent-button {
+	width: 100%;
+}
+
+.sixty-percent-box {
+	width: 60%;
+}
+
+.small-size-box {
+	margin-top: 10px;
+	font-size: 0.8rem;
+	line-height: 12px;
+}
+
+.background-image {
+	background-image: url('forest.jpg');
+}

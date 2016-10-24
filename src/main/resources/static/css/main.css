@@ -74,3 +74,8 @@ main {
 .timeline-card {
     width: 100%;
 }
+
+.low-margin-box {
+	margin-bottom: -20px; 
+}
+
