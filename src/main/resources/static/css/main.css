@@ -122,3 +122,9 @@ main {
     background: url('../images/chicago.jpg') no-repeat;
     background-size: cover;
 }
+
+.button-container {
+    margin: 0; 
+    padding-bottom: 0; 
+    padding-right: 0;	
+}
