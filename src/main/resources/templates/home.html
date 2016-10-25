@@ -33,30 +33,28 @@
                     <!--Timeline-->
                     <div class="mdl-cell mdl-cell--6-col mdl-cell--5-col-tablet mdl-cell--4-col-phone timeline">
                         <div class="mdl-card mdl-shadow--2dp new-message-card" style="padding: 20px;">
-                            
+
                             <form action="#">
-                                <div class="mdl-textfield mdl-js-textfield" 
+                                <div class="mdl-textfield mdl-js-textfield"
                                 style="margin-top: -15px; margin-bottom: -25px; width: 100%">
                                     <textarea class="mdl-textfield__input" type="text" rows= "3" id="sample5" ></textarea>
                                     <label class="mdl-textfield__label" for="sample5">Your message here</label>
                                 </div>
                             </form>
-                            
+
                             <div class="mdl-grid button-container">
-                            
+
                                 <div class="mdl-cell mdl-cell--8-col mdl-cell--hide-tablet mdl-cell--hide-phone">
                                     <!-- Spacer -->
                                 </div>
-                            
-                                <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-cell--4-col-phone"
-                                    style="text-align: right">
-		                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-		                                <i class="material-icons">send</i>    
-		                                Send
-		                            </button>
-	                            </div>
+
+                                <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-cell--4-col-phone" style="text-align: right">
+                                        <i class="material-icons">send</i>
+                                        Send
+                                    </button>
+                                </div>
                             </div>
-                            
+
                         </div>
 
                         <div th:replace="components/timeline :: timeline">...</div>
