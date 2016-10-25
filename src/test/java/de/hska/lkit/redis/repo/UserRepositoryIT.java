@@ -26,7 +26,7 @@ public class UserRepositoryIT {
 		user = new User();
 		user.setFirstname("Tim");
 		user.setLastname("Essig");
-		user.setUsername("ohIRealyHopeNoOneEverUsesThisUsernameInProduction");
+		user.setUsername("test:ohIRealyHopeNoOneEverUsesThisUsernameInProduction");
 		user.setPassword("xyz");
 	}
 	
@@ -70,8 +70,8 @@ public class UserRepositoryIT {
 	
 	@Test
 	public void followUser() {
-		String user1 = "user1";
-		String user2 = "user2";
+		String user1 = "test:user1";
+		String user2 = "test:user2";
 		
 		this.userRepositroy.startFollowUser(user1, user2);
 		assertTrue("User2 is a follower of User1",  this.userRepositroy.findFollowers(user1).contains(user2));

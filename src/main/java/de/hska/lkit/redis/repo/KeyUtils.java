@@ -29,7 +29,9 @@ public abstract class KeyUtils {
 		return "global:userid";
 	}
 	
-	
+	public static String auth(String auth) {
+		return "auth:" + auth + ":username";
+	}
 	
 
 }
