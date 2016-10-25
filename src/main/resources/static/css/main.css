@@ -41,6 +41,10 @@ main {
     background-color: #eee;
 }
 
+.mdl-card {
+    min-height: 0;
+}
+
 .user-menu-button {
     margin-left: 10px;
 }
@@ -52,9 +56,8 @@ main {
 }
 
 .profile-card > .mdl-card__title {
-    color: #fff;
-    height: 150px;
-    background-color: #4cb6ac;
+    height: 310px;
+    background: url("../images/profile.png") no-repeat;
 }
 
 .profile-card > .mdl-card__supporting-text {
@@ -71,11 +74,44 @@ main {
     justify-content: center;
 }
 
+.low-margin-box {
+    margin-bottom: -20px;
+}
+
+.timeline-entry-wrapper {
+    margin: 0;
+    padding-bottom: 20px;
+}
+
+.timeline-entry-wrapper > li {
+    min-height: 80px;
+}
+
 .timeline-card {
     width: 100%;
 }
 
-.low-margin-box {
-	margin-bottom: -20px; 
+.timeline-entry {
+    border-bottom: 1px solid #eee;
 }
 
+.timeline-entry:last-child{
+    border-bottom: none;
+}
+
+.timeline-entry-username {
+    text-decoration: none;
+    color: inherit;
+}
+
+.timeline-entry-username:hover {
+    color: #ff4081;
+}
+
+.timeline-entry-date-container {
+    display: flex;
+    height: 100%;
+}
+
+.timeline-entry-date {
+}
