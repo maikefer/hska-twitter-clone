@@ -28,12 +28,12 @@
             </div>
 
             <!--Timeline-->
-            <div class="mdl-cell mdl-cell--6-col mdl-cell--5-col-tablet mdl-cell--4-col-phone timeline" style="display:none">
+            <div id="timeline" class="mdl-cell mdl-cell--6-col mdl-cell--5-col-tablet mdl-cell--4-col-phone timeline">
                 <div th:replace="components/timeline :: timeline">...</div>
             </div>
 
             <!-- Followers -->
-            <div class="mdl-cell mdl-cell--6-col mdl-cell--5-col-tablet mdl-cell--4-col-phone timeline">
+            <div id="followers" class="mdl-cell mdl-cell--6-col mdl-cell--5-col-tablet mdl-cell--4-col-phone timeline" style="display: none;">
                 <div th:replace="components/followers :: followers">...</div>
             </div>
 

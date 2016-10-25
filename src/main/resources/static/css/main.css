@@ -62,6 +62,7 @@ main {
 .profile-card > .mdl-card__title {
     height: 310px;
     background: url("../images/profile.png") no-repeat;
+    cursor: pointer;
 }
 
 .profile-card > .mdl-card__supporting-text {
