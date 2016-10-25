@@ -80,7 +80,6 @@ public class User implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
@@ -100,12 +99,7 @@ public class User implements Serializable {
 			if (other.firstname != null)
 				return false;
 		} else if (!firstname.equals(other.firstname))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
+			return false;	
 		if (lastname == null) {
 			if (other.lastname != null)
 				return false;
