@@ -4,5 +4,19 @@
 }
 
 .form-box {
-	width: 60%;
+	width: 100%;
+}
+
+.form-container {
+	margin: 0;
+	padding: 0;
+}
+
+.no-margin-container{
+	margin: 0;
+}
+
+.button-container {
+	margin-top: 10px;
+	margin-bottom: 5px;
 }

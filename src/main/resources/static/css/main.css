@@ -81,4 +81,6 @@ main {
 
 .background-image-chicago {
     background-image: url('../images/chicago.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
