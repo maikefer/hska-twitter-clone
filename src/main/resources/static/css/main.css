@@ -37,6 +37,10 @@
     font-feature-settings: 'liga';
 }
 
+.mdl-layout__header-row a {
+    color: #fff;
+}
+
 main {
     background-color: #eee;
 }
