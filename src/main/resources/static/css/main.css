@@ -113,10 +113,7 @@ main {
     height: 100%;
 }
 
-.timeline-entry-date {
-}
 .background-image-chicago {
-    background-image: url('../images/chicago.jpg');
-    background-repeat: no-repeat;
+    background: url('../images/chicago.jpg') no-repeat;
     background-size: cover;
 }
