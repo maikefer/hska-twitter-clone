@@ -79,3 +79,6 @@ main {
 	margin-bottom: -20px; 
 }
 
+.background-image-chicago {
+    background-image: url('../images/chicago.jpg');
+}
