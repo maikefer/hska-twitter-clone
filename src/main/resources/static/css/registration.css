@@ -3,25 +3,33 @@
 	background: rgba(255, 255, 255, 0.8);
 }
 
-.centering-box {
-	margin: 0px auto;
-	width: 60%;
-}
-
-.hundred-percent-button {
+.hundred-percent-container {
 	width: 100%;
 }
 
-.sixty-percent-box {
-	width: 60%;
+.join-button-container {
+    display: flex;	
+    align-items: center;
 }
 
 .small-size-box {
-	margin-top: 10px;
-	font-size: 0.8rem;
+	font-size: 10px;
 	line-height: 12px;
 }
 
-.background-image {
-	background-image: url('forest.jpg');
+.registration-action-container {
+    margin: 0;     
+    padding: 0 8px; 	
+}
+
+.no-margin-container {
+	margin: 0;
+}
+
+.no-padding-container {
+	padding: 0;
+}
+
+.small-padding-container {
+	padding-top: 10px;
 }

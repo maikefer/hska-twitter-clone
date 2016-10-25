@@ -2,77 +2,118 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Login</title>
+<title>Login</title>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen" />-->
-    <link th:href="@{/webjars/material-design-lite/1.2.0/material.min.css}" rel="stylesheet" />
-    <link th:href="@{/css/main.css}" href="../static/css/main.css" rel="stylesheet" />
-    <link th:href="@{/css/login.css}" href="../static/css/login.css" rel="stylesheet" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!--<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen" />-->
+<link th:href="@{/webjars/material-design-lite/1.2.0/material.min.css}"
+	rel="stylesheet" />
+<link th:href="@{/css/main.css}" href="../static/css/main.css"
+	rel="stylesheet" />
+<link th:href="@{/css/login.css}" href="../static/css/login.css"
+	rel="stylesheet" />
 </head>
 
 <body>
-   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <!--navbar-->
-    <div th:replace="components/header :: header">...</div>
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+		<!--navbar-->
+		<div th:replace="components/header :: header">...</div>
 
-    <main class="mdl-layout__content background-image">
-        <div class="mdl-grid">
-            <!--Spacer-->
-            <div class="mdl-cell mdl-cell--1-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+		<main class="mdl-layout__content background-image-chicago">
+		<div class="mdl-grid">
+			<!--Spacer-->
+			<div
+				class="mdl-cell mdl-cell--1-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
 
-            <!--Content-->
-            <div class="mdl-cell mdl-cell--6-col mdl-cell--5-col-tablet mdl-cell--4-col-phone mdl-card content-box">
-		
+			<!--Content-->
+			<div
+				class="mdl-cell mdl-cell--7-col mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-card content-box">
+
 				<h3>Hi, nice to see you!</h3>
-				<p> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor 
-				invidunt ut labore et dolore magna aliquyam erat. </p>
-				
-				<!-- User Name Textfield -->
-  				<form action="#">
-  				<div class="mdl-textfield mdl-js-textfield form-box low-margin-box ">
-    				<input class="mdl-textfield__input" type="text" id="username"/> 
-    				<label class="mdl-textfield__label" for="username">Username</label>
-  				</div>
-  				</form>
+				<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+					diam nonumy eirmod tempor invidunt ut labore et dolore magna
+					aliquyam erat.</p>
 
-				<!-- Password Textfield -->
-				<form action="#">
-  					<div class="mdl-textfield mdl-js-textfield form-box">
-    					<input class="mdl-textfield__input" type="text" id="password"/>
-    					<label class="mdl-textfield__label" for="password">Password</label>
-  					</div>
-				</form>
-				
+
+				<!-- Username -->
+				<div class="mdl-grid form-container">
+					<div
+						class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet mdl-cell--4-col-phone no-margin-container">
+						<form action="#">
+							<div class="mdl-textfield mdl-js-textfield low-margin-box form-box">
+								<input class="mdl-textfield__input" type="text" id="username" />
+								<label class="mdl-textfield__label" for="username">Username</label>
+							</div>
+						</form>
+					</div>
+					<div
+						class="mdl-cell mdl-cell--4-col mdl-cell--hide-tablet mdl-cell--hide-phone">
+						<!-- Spacer -->
+					</div>
+				</div>
+
+				<!-- Password -->
+				<div class="mdl-grid form-container">
+					<div
+						class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet mdl-cell--4-col-phone no-margin-container">
+						<form action="#">
+							<div class="mdl-textfield mdl-js-textfield form-box ">
+								<input class="mdl-textfield__input" type="text" id="password" />
+								<label class="mdl-textfield__label" for="password">Password</label>
+							</div>
+						</form>
+					</div>
+					<div
+						class="mdl-cell mdl-cell--4-col mdl-cell--hide-tablet mdl-cell--hide-phone">
+						<!-- Spacer -->
+					</div>
+				</div>
+
+
 				<!-- Submit Button -->
-				<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored form-box">
-  					Log me in!
-				</button>
-				
-				<p> You're not a member yet, how dare you?  Register <a href="registration"> here</a>. </p>
-            </div>
-            
-            <div class="mdl-cell mdl-cell--3-col mdl-cell--3-col-tablet mdl-cell--4-col-phone mdl-card content-box">
-				<h4>See what's happening!</h4>
-				<ul class="mdl-list">
-					<li class="mdl-list__item"> Post 1</li>
-					<li class="mdl-list__item"> Post 2</li>
-					<li class="mdl-list__item"> Post 3</li>
-				</ul>
-            </div>
+				<div class="mdl-grid form-container">
+					<div
+						class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet mdl-cell--4-col-phone no-margin-container">
 
-            <!--Spacer-->
-            <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--hide-phone"></div>
-        </div>
-    </main>
-</div>
-    <script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
-    <!--<script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>-->
-    <script th:src="@{/webjars/material-design-lite/1.2.0/material.min.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
-    <script th:src="@{/js/login.js}"></script>
+						<button
+							class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect 
+				                mdl-button--colored form-box button-container">
+							Login</button>
+						<p style="margin-bottom: o">
+							You're not a member yet, how dare you? Register 
+							<a th:href="registration"> here</a>.
+						</p>
+					</div>
+					<div
+                        class="mdl-cell mdl-cell--4-col mdl-cell--hide-tablet mdl-cell--hide-phone">
+                        <!-- Spacer -->
+                    </div>
+				</div>
+
+			</div>
+
+			<div
+				class="mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--hide-phone mdl-card content-box">
+				<h4>What's on right now?</h4>
+				<ul class="mdl-list">
+					<li class="mdl-list__item">Post 1</li>
+					<li class="mdl-list__item">Post 2</li>
+					<li class="mdl-list__item">Post 3</li>
+				</ul>
+			</div>
+
+			<!--Spacer-->
+			<div
+				class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--hide-phone"></div>
+		</div>
+		</main>
+	</div>
+	<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+	<!--<script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>-->
+	<script th:src="@{/webjars/material-design-lite/1.2.0/material.min.js}"></script>
+	<script th:src="@{/js/main.js}"></script>
+	<script th:src="@{/js/login.js}"></script>
 </body>
 
 </html>
-	

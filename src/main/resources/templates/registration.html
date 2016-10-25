@@ -20,65 +20,84 @@
 		<!--navbar-->
 		<div th:replace="components/header :: header">...</div>
 
-		<main class="mdl-layout__content background-image ">
+		<main class="mdl-layout__content background-image-chicago">
 		<div class="mdl-grid">
 			<!--Spacer-->
 			<div
-				class="mdl-cell mdl-cell--3-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+				class="mdl-cell mdl-cell--1-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
 
 			<!--Content-->
 			<div
-				class="mdl-cell mdl-cell--6-col mdl-cell--5-col-tablet mdl-cell--4-col-phone mdl-card padding-box">
+				class="mdl-cell mdl-cell--10-col mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-card padding-box ">
 
-				<h3>You want to join our freaking cool Network? AWESOME!</h3>
+				<div class="mdl-grid hundred-percent-container no-padding-container">
+					<div class="mdl-cell mdl-cell--12-col">
+						<div class="registration-action-container">
+							<h3>You want to join our freaking cool Network? AWESOME!</h3>
 
-				<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-					diam nonumy eirmod tempor invidunt ut labore et dolore magna
-					aliquyam erat.</p>
-
-
-				<div class="centering-box">
-					<!-- User Name Textfield -->
-					<form action="#">
-						<div
-							class="mdl-textfield mdl-js-textfield low-margin-box">
-							<input class="mdl-textfield__input" type="text" id="username" />
-							<label class="mdl-textfield__label" for="username">Username</label>
+							<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+								sed diam nonumy eirmod tempor invidunt ut labore et dolore magna
+								aliquyam erat.</p>
 						</div>
-					</form>
+					</div>
+				</div>
 
-					<!-- Email Textfield -->
-					<form action="#">
-						<div
-							class="mdl-textfield mdl-js-textfield low-margin-box">
-							<input class="mdl-textfield__input" type="text" id="email" /> <label
-								class="mdl-textfield__label" for="email">E-Mail</label>
-						</div>
-					</form>
+				<div class="mdl-grid no-margin-container">
+					<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone">
+						<form action="#">
+							<div
+								class="mdl-textfield mdl-js-textfield low-margin-box right-pading-box">
+								<input class="mdl-textfield__input" type="text" id="username" />
+								<label class="mdl-textfield__label" for="username">Username</label>
+							</div>
+						</form>
+					</div>
 
-					<!-- Password Textfield -->
-					<form action="#">
-						<div class="mdl-textfield mdl-js-textfield ">
-							<input class="mdl-textfield__input" type="text" id="password" />
-							<label class="mdl-textfield__label" for="password">Password</label>
-						</div>
-					</form>
+					<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone">
+
+						<form action="#">
+							<div
+								class="mdl-textfield mdl-js-textfield low-margin-box right-pading-box">
+								<input class="mdl-textfield__input" type="text" id="email" /> <label
+									class="mdl-textfield__label" for="email">E-Mail</label>
+							</div>
+						</form>
+					</div>
+
+					<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone">
+						<form action="#">
+							<div
+								class="mdl-textfield mdl-js-textfield low-margin-box right-pading-box">
+								<input class="mdl-textfield__input" type="text" id="password" />
+								<label class="mdl-textfield__label" for="password">Password</label>
+							</div>
+						</form>
+					</div>
+				</div>
+
+
+				<div class="mdl-grid registration-action-container small-padding-container">
+
+					<div
+						class="mdl-cell mdl-cell--8-col mdl-cell--4-col-phone small-size-box">
+						By registering you agree to our Terms of Service and our Privacy
+						Agreement. Aaaand we will use cookies, and maybe but only maybe
+						send you some home :></div>
 
 					<!-- Submit Button -->
-					<button
-						class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored hundred-percent-button">
-						Join now!</button>
-						
-					<p class="small-size-box"> 
-					By registering you agree to our Terms of Service and our 
-					Privacy Agreement. Aaaand we will use cookies, and maybe but only maybe send you some home ;)  </p>
-					
+					<div
+						class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone join-button-container">
+						<button
+							class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect 
+						mdl-button--colored hundred-percent-container">
+							Join now!</button>
+					</div>
 				</div>
 			</div>
 
 			<!--Spacer-->
 			<div
-				class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--hide-phone"></div>
+				class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--hide-phone"></div>
 		</div>
 		</main>
 	</div>
@@ -86,7 +105,7 @@
 	<!--<script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>-->
 	<script th:src="@{/webjars/material-design-lite/1.2.0/material.min.js}"></script>
 	<script th:src="@{/js/main.js}"></script>
-	<script th:src="@{/js/login.js}"></script>
+	<script th:src="@{/js/registration.js}"></script>
 </body>
 
 </html>
