@@ -1,0 +1,16 @@
+.new-message-card {
+    width: 100%;
+    margin-bottom: 15px;
+    min-height: 0;
+}
+
+.button-container {
+    margin: 0;
+    padding-bottom: 0;
+    padding-right: 0;
+}
+
+.send-button {
+    margin-right: -10px;
+    margin-bottom: -10px;
+}

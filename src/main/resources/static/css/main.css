@@ -1,7 +1,124 @@
-body {
-    padding-top: 70px;
+/*noinspection CssUnknownTarget*/
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../webjars/material-design-icons/3.0.1/MaterialIcons-Regular.eot); /* For IE6-8 */
+    src: local('Material Icons'),
+    local('MaterialIcons-Regular'),
+    url(../webjars/material-design-icons/3.0.1/MaterialIcons-Regular.woff2) format('woff2'),
+    url(../webjars/material-design-icons/3.0.1/MaterialIcons-Regular.woff) format('woff'),
+    url(../webjars/material-design-icons/3.0.1/MaterialIcons-Regular.ttf) format('truetype');
 }
 
-.navbar-brand {
-    color: #4099ff !important;
+.material-icons {
+    /*noinspection CssNoGenericFontName*/
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+.mdl-layout__header-row a {
+    color: #fff;
+}
+
+main {
+    background-color: #eee;
+}
+
+.mdl-card {
+    min-height: 0;
+}
+
+.user-menu-button {
+    margin-left: 10px;
+}
+
+.profile-card {
+    min-height: 0;
+    min-width: 220px;
+    width: 100%;
+}
+
+.profile-card > .mdl-card__title {
+    height: 310px;
+    background: url("../images/profile.png") no-repeat;
+    cursor: pointer;
+}
+
+.profile-card > .mdl-card__supporting-text {
+    display: flex;
+    justify-content: space-around;
+}
+
+.profile-card > .mdl-card__supporting-text > a {
+    text-decoration: none;
+}
+
+.profile-card > .mdl-card__actions {
+    display: flex;
+    justify-content: center;
+}
+
+.low-margin-box {
+    margin-bottom: -20px;
+}
+
+.timeline-entry-wrapper {
+    margin: 0;
+    padding-bottom: 20px;
+}
+
+.timeline-entry-wrapper > li {
+    min-height: 80px;
+}
+
+.timeline-card {
+    width: 100%;
+}
+
+.timeline-entry {
+    border-bottom: 1px solid #eee;
+}
+
+.timeline-entry:last-child{
+    border-bottom: none;
+}
+
+.timeline-entry-username {
+    text-decoration: none;
+    color: inherit;
+}
+
+.timeline-entry-username:hover {
+    color: #ff4081;
+}
+
+.timeline-entry-date-container {
+    display: flex;
+    height: 100%;
+}
+
+.background-image-chicago {
+    background: url('../images/chicago.jpg') no-repeat;
+    background-size: cover;
 }

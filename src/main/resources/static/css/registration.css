@@ -1,0 +1,35 @@
+.padding-box {
+	padding: 20px;
+	background: rgba(255, 255, 255, 0.8);
+}
+
+.hundred-percent-container {
+	width: 100%;
+}
+
+.join-button-container {
+    display: flex;	
+    align-items: center;
+}
+
+.small-size-box {
+	font-size: 10px;
+	line-height: 12px;
+}
+
+.registration-action-container {
+    margin: 0;     
+    padding: 0 8px; 	
+}
+
+.no-margin-container {
+	margin: 0;
+}
+
+.no-padding-container {
+	padding: 0;
+}
+
+.small-padding-container {
+	padding-top: 10px;
+}
