@@ -16,7 +16,7 @@ public class Post implements Serializable {
 	private String id;
 	private LocalDateTime timestamp;
 	private String message;
-	private String user_id;
+	private String user;
 
 	public Post() {
 
@@ -27,11 +27,23 @@ public class Post implements Serializable {
 	 * @param timestamp
 	 * @param message
 	 */
-	public Post(String id, LocalDateTime timestamp, String message, String user_id) {
+	public Post(String id, LocalDateTime timestamp, String message, String user) {
 		this.id = id;
 		this.timestamp = timestamp;
 		this.message = message;
-		this.user_id = user_id;
+		this.user = user;
+	}
+	
+	
+
+	/**
+	 * @param message
+	 * @param user
+	 */
+	public Post(String message, String user) {
+		this.timestamp = LocalDateTime.now();
+		this.message = message;
+		this.user = user;
 	}
 
 	public String getId() {
@@ -58,12 +70,12 @@ public class Post implements Serializable {
 		this.message = message;
 	}
 
-	public String getUser_id() {
-		return user_id;
+	public String getUser() {
+		return user;
 	}
 
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUser(String user) {
+		this.user = user;
 	}
 
 	@Override
@@ -73,7 +85,7 @@ public class Post implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((message == null) ? 0 : message.hashCode());
 		result = prime * result + ((timestamp == null) ? 0 : timestamp.hashCode());
-		result = prime * result + ((user_id == null) ? 0 : user_id.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -101,17 +113,17 @@ public class Post implements Serializable {
 				return false;
 		} else if (!timestamp.equals(other.timestamp))
 			return false;
-		if (user_id == null) {
-			if (other.user_id != null)
+		if (user == null) {
+			if (other.user != null)
 				return false;
-		} else if (!user_id.equals(other.user_id))
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Post [id=" + id + ", timestamp=" + timestamp + ", message=" + message + ", user_id=" + user_id + "]";
+		return "Post [id=" + id + ", timestamp=" + timestamp + ", message=" + message + ", user=" + user + "]";
 	}
 
 }
