@@ -1,4 +1,5 @@
 # Verteilte Systeme 2 Labor
+[![Build Status](https://travis-ci.com/daB0bby/destributed-systems-2-lab.svg?token=73a8dGHWvg7aSEGFEBxC&branch=master)](https://travis-ci.com/daB0bby/destributed-systems-2-lab)
 
 ## Kurzbeschreibung
 Twitter-Clone mit Spring-Boot, Spring Web, Redis und Bootstrap
