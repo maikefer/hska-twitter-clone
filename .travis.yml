@@ -1,3 +1,6 @@
+services:
+  - redis-server
+
 language: java
 
 jdk:
