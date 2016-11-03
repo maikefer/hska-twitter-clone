@@ -8,9 +8,18 @@
     margin: 0;
     padding-bottom: 0;
     padding-right: 0;
+    align-items: center;
 }
 
 .send-button {
     margin-right: -10px;
     margin-bottom: -10px;
+}
+
+.counter-font {
+	font-size: 20px;
+	color: lightgray;
+	font-weight: 800;
+	margin-bottom: 0px;
+	text-align: right;
 }
