@@ -28,7 +28,7 @@
 	breaklines=true,
 	backgroundcolor=\color{background},
 	morestring=[s][\color{red}]{"}{"},
-	morekeywords={set, hash, key},
+	morekeywords={set, hash, key, list},
 	morecomment=[l]{//},
 	literate=
 	*{0}{{{\color{numb}0}}}{1}
@@ -166,8 +166,8 @@ set user:*:following
 key auth:*:username
 	auth:1aba56d8c5:username = essigt
 
-//Set aller Posts
-set post:all = {1,2,3,4}
+//Liste aller Posts
+list post:all = {1,2,3,4}
 
 //HashSets fuer die einzelnen Posts
 hash post:*
