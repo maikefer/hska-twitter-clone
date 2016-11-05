@@ -17,7 +17,7 @@ cd src/main/docker/
 docker-compose up
 ```
 
-(doc/images/haproxy.png "HA-Proxy Screenshot")
+![Screenshot of HAProxy stats and docker-compose logs](doc/images/haproxy.png)
 
   
   
