@@ -14,10 +14,13 @@ import redis.clients.jedis.JedisPoolConfig;
 
 @Configuration
 public class RedisConfiguration {
+	
+	
+	
 	@Bean
 	public RedisConnectionFactory getConnectionFactory() {
 		JedisConnectionFactory jRedisConnectionFactory = new JedisConnectionFactory(new JedisPoolConfig());
-		jRedisConnectionFactory.setHostName("localhost");
+		jRedisConnectionFactory.setHostName("redis");
 		jRedisConnectionFactory.setPort(6379);
 		jRedisConnectionFactory.setPassword("");
 		return jRedisConnectionFactory;

@@ -1,0 +1,21 @@
+version: '2'
+services:
+  spring_1:
+    image: hska/twitter-spring
+    depends_on:
+      - redis
+  spring_2:
+    image: hska/twitter-spring
+    depends_on:
+      - redis
+  haproxy:
+    image: hska/haproxy
+    ports:
+      - "8080:8080"
+      - "8989:8989"
+    depends_on:
+      - spring_1
+      - spring_2
+  redis:
+    image: redis
+
