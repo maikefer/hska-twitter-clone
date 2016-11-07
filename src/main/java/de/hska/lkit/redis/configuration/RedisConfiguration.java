@@ -19,8 +19,10 @@ public class RedisConfiguration {
 	
 	@Bean
 	public RedisConnectionFactory getConnectionFactory() {
+		String redisHost = System.getenv().getOrDefault("REDIS_HOST", "localhost");
+		
 		JedisConnectionFactory jRedisConnectionFactory = new JedisConnectionFactory(new JedisPoolConfig());
-		jRedisConnectionFactory.setHostName("redis");
+		jRedisConnectionFactory.setHostName(redisHost);
 		jRedisConnectionFactory.setPort(6379);
 		jRedisConnectionFactory.setPassword("");
 		return jRedisConnectionFactory;
