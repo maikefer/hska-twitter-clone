@@ -4,10 +4,14 @@ services:
     image: hska/twitter-spring
     depends_on:
       - redis
+    environment:
+      - REDIS_HOST=redis
   spring_2:
     image: hska/twitter-spring
     depends_on:
       - redis
+    environment:
+      - REDIS_HOST=redis
   haproxy:
     image: hska/haproxy
     ports:
