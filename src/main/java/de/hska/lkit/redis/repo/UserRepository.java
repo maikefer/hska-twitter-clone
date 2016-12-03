@@ -36,7 +36,7 @@ public class UserRepository {
 	public UserRepository(StringRedisTemplate stringRedisTemplate) {
 		this.stringRedisTemplate = stringRedisTemplate;	
 	}
-
+	
 	@PostConstruct
 	private void init() {
 		this.hashOps = this.stringRedisTemplate.opsForHash();

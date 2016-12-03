@@ -52,10 +52,8 @@ public class AuthRepository {
 		
 		redis.boundHashOps(KeyUtils.user(username)).put("auth", auth);
 		redis.opsForValue().set(KeyUtils.auth(auth), username, timeout, tUnit);
-		
 		return auth;
 	}
-
 	
 	/**
 	 * Deletes the authentication of the given user
