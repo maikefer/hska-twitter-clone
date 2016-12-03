@@ -35,5 +35,4 @@ public class CookieInterceptor extends HandlerInterceptorAdapter {
 		SessionSecurity.clear();
 		return true;
 	}
-	
 }
