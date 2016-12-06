@@ -50,7 +50,7 @@ public class UserRepository {
 	 * @return
 	 */
 	public boolean isUsernameAvailable(String username) {
-		return setOps.isMember(userAll(), user(username));
+		return !setOps.isMember(userAll(), user(username));
 	}
 
 	/**

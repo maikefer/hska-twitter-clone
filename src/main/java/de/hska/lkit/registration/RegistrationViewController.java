@@ -51,7 +51,7 @@ public class RegistrationViewController {
             model.addAttribute("error", "Please type in a correct Password");
             return "registration";
         }
-        if (userRepo.isUsernameAvailable(userForm.getUsername())) {
+        if (!userRepo.isUsernameAvailable(userForm.getUsername())) {
             model.addAttribute("error", "This username is already taken. Try a new one");
             return "registration";
         }
