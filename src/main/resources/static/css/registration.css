@@ -8,7 +8,7 @@
 }
 
 .join-button-container {
-    display: flex;	
+    display: flex;
     align-items: center;
 }
 
@@ -18,8 +18,8 @@
 }
 
 .registration-action-container {
-    margin: 0;     
-    padding: 0 8px; 	
+    margin: 0;
+    padding: 0 8px;
 }
 
 .no-margin-container {
@@ -32,4 +32,8 @@
 
 .small-padding-container {
 	padding-top: 10px;
+}
+
+.error {
+    padding-left: 16px;
 }
