@@ -1,7 +1,15 @@
 package de.hska.lkit.login;
 
+import de.hska.lkit.redis.model.User;
+import de.hska.lkit.sessions.LoginController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by bob on 20/10/2016.
@@ -10,9 +18,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class LoginViewController {
 
-	@RequestMapping(value = "/login")
-	public String showLoginView() {
+    @Autowired
+    private LoginController loginController;
+
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String showLoginView(Model model) {
+        model.addAttribute("user", new User());
 
 		return "login";
 	}
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String showLoginView(@ModelAttribute("user") User userForm, HttpServletResponse response, Model model) {
+
+        if (userForm.getUsername() != null)
+            if (userForm.getPassword() != null) {
+                if (loginController.login(userForm, response)) {
+                    // Redirect user to home
+                    return "redirect:/";
+                }
+            }
+
+        model.addAttribute("error", "Password or username is wrong.");
+        return "login";
+    }
 }
