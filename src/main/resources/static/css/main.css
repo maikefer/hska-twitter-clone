@@ -45,6 +45,10 @@ main {
     background-color: #eee;
 }
 
+.without-navbar {
+    padding-top: 50px;
+}
+
 .mdl-card {
     min-height: 0;
 }
