@@ -3,7 +3,7 @@ package de.hska.lkit.redis.model;
 import java.io.Serializable;
 
 /**
- * 
+ *
  * @author essigt
  *
  */
@@ -13,8 +13,7 @@ public class User implements Serializable {
 	private String id;
 	private String username;
 	private String password;
-	private String firstname;
-	private String lastname;
+	private String email;
 
 	public User() {
 
@@ -24,15 +23,12 @@ public class User implements Serializable {
 	 * @param id
 	 * @param username
 	 * @param password
-	 * @param firstname
-	 * @param lastname
 	 */
-	public User(String id, String username, String password, String firstname, String lastname) {
+	public User(String id, String username, String password) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		this.firstname = firstname;
-		this.lastname = lastname;
+		this.email = email;
 	}
 
 	public String getId() {
@@ -59,28 +55,15 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public String getFirstname() {
-		return firstname;
-	}
+    public String getEmail() { return email; }
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
+    public void setEmail(String email) { this.email = email; }
 
-	public String getLastname() {
-		return lastname;
-	}
-
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-
-	@Override
+    @Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
-		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
@@ -95,15 +78,10 @@ public class User implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (firstname == null) {
-			if (other.firstname != null)
+		if (email == null) {
+			if (other.email != null)
 				return false;
-		} else if (!firstname.equals(other.firstname))
-			return false;	
-		if (lastname == null) {
-			if (other.lastname != null)
-				return false;
-		} else if (!lastname.equals(other.lastname))
+		} else if (!email.equals(other.email))
 			return false;
 		if (password == null) {
 			if (other.password != null)
@@ -120,8 +98,7 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstname=" + firstname
-				+ ", lastname=" + lastname + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + "]";
 	}
 
 }
