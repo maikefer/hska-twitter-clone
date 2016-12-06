@@ -24,32 +24,31 @@ public class LoginController {
 	private AuthRepository repository;
 	private static final Duration TIMEOUT = Duration.ofMinutes(5);
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@ModelAttribute("user") @Valid User user, HttpServletResponse response, Model model) {
+	public boolean login(User user, HttpServletResponse response) {
 		if (repository.auth(user.getUsername(), user.getPassword())) {
 			String auth = repository.addAuth(user.getUsername(), TIMEOUT.getSeconds(), TimeUnit.SECONDS);
 			Cookie cookie = new Cookie("auth", auth);
 			response.addCookie(cookie);
-			model.addAttribute("user", user.getUsername());
 			SessionSecurity.set(user.getUsername(), auth);
-			return "users/" + user.getUsername();
+			return true;
 		}
-		model.addAttribute("user", new User());
-		return "login";
+
+        // Login not valid
+		return false;
 	}
-		
-	// TODO: where do we go after logout?
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/logout")
 	public String logout() {
-		if (isLoggedin(SessionSecurity.getName())) {
+		if (isLoggedin()) {
 			String username = SessionSecurity.getName();
 			repository.deleteAuth(username);
 			SessionSecurity.clear();
 		}
+
 		return "redirect:/login";
 	}
-	
-	public boolean isLoggedin(String username) {
+
+	public boolean isLoggedin() {
 		return repository.isAuthValid(SessionSecurity.getToken()).equals(SessionSecurity.getName());
 	}
 }

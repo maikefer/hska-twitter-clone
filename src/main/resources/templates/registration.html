@@ -27,8 +27,7 @@
 				class="mdl-cell mdl-cell--1-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
 
 			<!--Content-->
-			<div
-				class="mdl-cell mdl-cell--10-col mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-card padding-box ">
+			<div class="mdl-cell mdl-cell--10-col mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-card padding-box ">
 
 				<div class="mdl-grid hundred-percent-container no-padding-container">
 					<div class="mdl-cell mdl-cell--12-col">
@@ -42,57 +41,61 @@
 					</div>
 				</div>
 
-				<div class="mdl-grid no-margin-container">
-					<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone">
-						<form action="#">
-							<div
-								class="mdl-textfield mdl-js-textfield low-margin-box right-pading-box">
-								<input class="mdl-textfield__input" type="text" id="username" />
-								<label class="mdl-textfield__label" for="username">Username</label>
-							</div>
-						</form>
-					</div>
+                <div class="error" th:if="${error}" th:text="${error}"></div>
 
-					<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone">
+                <form action="#" th:action="@{/registration}" th:object="${user}" th:method="post">
 
-						<form action="#">
-							<div
-								class="mdl-textfield mdl-js-textfield low-margin-box right-pading-box">
-								<input class="mdl-textfield__input" type="text" id="email" /> <label
-									class="mdl-textfield__label" for="email">E-Mail</label>
-							</div>
-						</form>
-					</div>
+				    <div class="mdl-grid no-margin-container">
+                        <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone">
+                            <!--<form action="#">-->
+                                <div
+                                    class="mdl-textfield mdl-js-textfield low-margin-box right-pading-box">
+                                    <input class="mdl-textfield__input" type="text" id="username" th:field="*{username}" />
+                                    <label class="mdl-textfield__label" for="username">Username</label>
+                                </div>
+                            <!--</form>-->
+                        </div>
 
-					<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone">
-						<form action="#">
-							<div
-								class="mdl-textfield mdl-js-textfield low-margin-box right-pading-box">
-								<input class="mdl-textfield__input" type="text" id="password" />
-								<label class="mdl-textfield__label" for="password">Password</label>
-							</div>
-						</form>
-					</div>
-				</div>
+                        <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone">
 
+                            <!--<form action="#">-->
+                                <div
+                                    class="mdl-textfield mdl-js-textfield low-margin-box right-pading-box">
+                                    <input class="mdl-textfield__input" type="email" id="email" th:field="*{email}" />
+                                    <label class="mdl-textfield__label" for="email">E-Mail</label>
+                                </div>
+                            <!--</form>-->
+                        </div>
 
-				<div class="mdl-grid registration-action-container small-padding-container">
+                        <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone">
+                            <!--<form action="#">-->
+                                <div
+                                    class="mdl-textfield mdl-js-textfield low-margin-box right-pading-box">
+                                    <input class="mdl-textfield__input" type="password" id="password" th:field="*{password}" />
+                                    <label class="mdl-textfield__label" for="password">Password</label>
+                                </div>
+                            <!--</form>-->
+                        </div>
+				    </div>
 
-					<div
-						class="mdl-cell mdl-cell--8-col mdl-cell--4-col-phone small-size-box">
-						By registering you agree to our Terms of Service and our Privacy
-						Agreement. Aaaand we will use cookies, and maybe but only maybe
-						send you some home :></div>
+				    <div class="mdl-grid registration-action-container small-padding-container">
 
-					<!-- Submit Button -->
-					<div
-						class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone join-button-container">
-						<button
-							class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect 
-						mdl-button--colored hundred-percent-container">
-							Join now!</button>
-					</div>
-				</div>
+                        <div
+                            class="mdl-cell mdl-cell--8-col mdl-cell--4-col-phone small-size-box">
+                            By registering you agree to our Terms of Service and our Privacy
+                            Agreement. Aaaand we will use cookies, and maybe but only maybe
+                            send you some home :></div>
+
+                        <!-- Submit Button -->
+                        <div
+                            class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone join-button-container">
+                            <button type="submit" value="Submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored hundred-percent-container">
+                                Join now!
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
 			</div>
 
 			<!--Spacer-->
