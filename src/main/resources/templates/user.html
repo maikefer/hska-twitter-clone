@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Users name - Profile</title>
+    <title th:text="${user.username}"></title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -47,7 +47,7 @@
     <!--<script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>-->
     <script th:src="@{/webjars/material-design-lite/1.2.0/material.min.js}"></script>
     <script th:src="@{/js/main.js}"></script>
-    <script th:src="@{/js/user.js}"></script>
+    <!--<script th:src="@{/js/user.js}"></script>-->
 </body>
 
 </html>

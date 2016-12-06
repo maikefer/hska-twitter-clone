@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Error</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen" />-->
+    <link th:href="@{/webjars/material-design-lite/1.2.0/material.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/main.css}" href="../static/css/main.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <!--navbar-->
+        <div th:replace="components/header :: header">...</div>
+
+        <main class="mdl-layout__content">
+            <h1>Error</h1>
+            <p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
+            <a href="index.html" th:href="@{/}">Back to Home Page</a>
+
+        </main>
+    </div>
+
+    <script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+    <!--<script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>-->
+    <script th:src="@{/webjars/material-design-lite/1.2.0/material.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>

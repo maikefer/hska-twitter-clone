@@ -33,7 +33,11 @@ $(function() {
     var pathname = window.location.pathname;
     // navigate to user
     if (pathname === '/') {
-      window.location.href = "/user";
+      // get profile name
+      var name = $('#profile-name').text();
+
+      // Navigate to user
+      window.location.href = "/users/" + name;
     } else {
       show('timeline');
     }
