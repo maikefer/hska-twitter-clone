@@ -30,9 +30,10 @@ public class CookieInterceptor extends HandlerInterceptorAdapter {
 						}
 					}
 				}
-		
+
 		// TODO: may causes bugs. Changing the pathPatterns in WebConfig.java may fixes the bugs.
 		SessionSecurity.clear();
-		return true;
+		res.sendRedirect("/login");
+		return false;
 	}
 }
