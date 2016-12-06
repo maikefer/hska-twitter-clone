@@ -5,17 +5,14 @@ import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import de.hska.lkit.redis.model.User;
 import de.hska.lkit.redis.repo.AuthRepository;
+
 
 @Controller
 public class LoginController {
@@ -39,7 +36,7 @@ public class LoginController {
 
 	@RequestMapping(value = "/logout")
 	public String logout() {
-		if (isLoggedin()) {
+		if (isLoggedIn()) {
 			String username = SessionSecurity.getName();
 			repository.deleteAuth(username);
 			SessionSecurity.clear();
@@ -48,7 +45,7 @@ public class LoginController {
 		return "redirect:/login";
 	}
 
-	public boolean isLoggedin() {
+	public boolean isLoggedIn() {
 		return repository.isAuthValid(SessionSecurity.getToken()).equals(SessionSecurity.getName());
 	}
 }
