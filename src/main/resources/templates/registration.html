@@ -41,7 +41,7 @@
 					</div>
 				</div>
 
-                <div class="error" th:if="${error}" th:text="${error}"></div>
+                <div class="error mdl-textfield__error" th:if="${error}" th:text="${error}"></div>
 
                 <form action="#" th:action="@{/registration}" th:object="${user}" th:method="post">
 

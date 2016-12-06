@@ -122,3 +122,8 @@ main {
     background: url('../images/chicago.jpg') no-repeat;
     background-size: cover;
 }
+
+.error {
+    visibility: visible;
+    padding: 16px;
+}
