@@ -9,14 +9,14 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class AuthRepository {
-	
+
 	@Autowired
 	private StringRedisTemplate redis;
 
-	
+
 	/**
 	 * Checks if the auth-token is vaild
-	 * 
+	 *
 	 * @param auth
 	 * @return The username or null if the auth-token is not valid
 	 */
@@ -26,9 +26,9 @@ public class AuthRepository {
 			return null;
 		} else {
 			return username;
-		}		
+		}
 	}
-	
+
 	/**
 	 * Checks if the username and password are correct
 	 * @param username
@@ -37,6 +37,10 @@ public class AuthRepository {
 	 */
 	public boolean auth(String username, String pass) {
 		String password = (String) redis.opsForHash().get(KeyUtils.user(username), "password");
+
+		if (password == null)
+		    return false;
+
 		return password.equals(pass);
 	}
 
@@ -49,15 +53,15 @@ public class AuthRepository {
 	 */
 	public String addAuth(String username, long timeout, TimeUnit tUnit) {
 		String auth = UUID.randomUUID().toString();
-		
+
 		redis.boundHashOps(KeyUtils.user(username)).put("auth", auth);
 		redis.opsForValue().set(KeyUtils.auth(auth), username, timeout, tUnit);
 		return auth;
 	}
-	
+
 	/**
 	 * Deletes the authentication of the given user
-	 * @param uname
+	 * @param username
 	 */
 	public void deleteAuth(String username) {
 		String auth = (String)redis.opsForHash().get(KeyUtils.user(username), "auth");
