@@ -33,15 +33,15 @@
                     <div class="mdl-card mdl-shadow--2dp timeline-card" th:fragment="follower">
                         <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
                             <div class="mdl-tabs__tab-bar">
-                                <a id="following-tab" href="#following-content" class="mdl-tabs__tab">Following</a>
-                                <a id="follower-tab" href="#follower-content" class="mdl-tabs__tab is-active">Follower</a>
+                                <a id="following-tab" href="#following-content" class="mdl-tabs__tab is-active">Following</a>
+                                <a id="follower-tab" href="#follower-content" class="mdl-tabs__tab">Follower</a>
                             </div>
 
-                            <div class="mdl-tabs__panel" id="following-content">
+                            <div class="mdl-tabs__panel is-active" id="following-content">
                                 <div th:replace="components/followers :: entryFollowing">...</div>
                             </div>
 
-                            <div class="mdl-tabs__panel is-active" id="follower-content">
+                            <div class="mdl-tabs__panel" id="follower-content">
                                 <div th:replace="components/followers :: entryFollower">...</div>
                             </div>
 

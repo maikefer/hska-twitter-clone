@@ -7,8 +7,8 @@
     </div>
 
     <div class="mdl-card__supporting-text">
-        <a th:href="@{|/users/${user.username}/follower?following=true|}" class="mdl-badge" th:attr="data-badge=${followingCnt}">Following</a>
-        <a th:href="@{|/users/${user.username}/follower?follower=true|}" class="mdl-badge" th:attr="data-badge=${followerCnt}">Follower</a>
+        <a th:href="@{|/users/${user.username}/following|}" class="mdl-badge" th:attr="data-badge=${followingCnt}">Following</a>
+        <a th:href="@{|/users/${user.username}/follower|}" class="mdl-badge" th:attr="data-badge=${followerCnt}">Follower</a>
     </div>
 
     <div class="mdl-card__actions" th:if="${!isSelf}">

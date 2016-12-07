@@ -1,24 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<div class="mdl-card mdl-shadow--2dp timeline-card" th:fragment="follower">
-    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
-        <div class="mdl-tabs__tab-bar">
-            <a id="following-tab" href="#following" class="mdl-tabs__tab">Following</a>
-            <a id="follower-tab" href="#follower" class="mdl-tabs__tab">Follower</a>
-        </div>
-
-        <div class="mdl-tabs__panel is-active" id="following">
-            <div th:replace="components/followers :: entryFollowing">...</div>
-        </div>
-
-        <div class="mdl-tabs__panel" id="follower">
-            <div th:replace="components/followers :: entryFollower">...</div>
-        </div>
-
-    </div>
-</div>
-
 <div class="timeline-entry" th:fragment="entryFollowing">
     <ul class="mdl-list timelines-entry-wrapper" style="margin-top: 6px; margin-bottom: 6px">
 
@@ -31,13 +13,13 @@
                  <a th:href="@{|/users/${follower.username}|}" class="timeline-entry-username" th:text="${follower.username}">John Doe</a>
             </span>
 
-            <form th:if="${!follower.following}" action="#" th:action="@{|/follow/${follower.username}|}" th:method="get">
-                <button th:attrappend="disabled=${currentUser.username == follower.username}" type="submit" value="Submit" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored">
+            <form th:if="${!follower.following}" action="#" th:action="@{|/follow/${follower.username}/${user.username}/following|}" th:method="get">
+                <button th:attrappend="disabled=${currentUser.username == follower.username}" type="submit" value="Submit" class="follow-btn mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored">
                     Follow
                 </button>
             </form>
-            <form th:if="${follower.following}" action="#" th:action="@{|/unfollow/${follower.username}|}" th:method="get">
-                <button th:attrappend="disabled=${currentUser.username == follower.username}" type="submit" value="Submit" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" style="color:#f44336;">
+            <form th:if="${follower.following}" action="#" th:action="@{|/unfollow/${follower.username}/${user.username}/following|}" th:method="get">
+                <button th:attrappend="disabled=${currentUser.username == follower.username}" type="submit" value="Submit" class="unfollow-btn mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" style="color:#f44336;">
                     Unfollow
                 </button>
             </form>
@@ -57,12 +39,12 @@
                 <a th:href="@{|/users/${follower.username}|}" class="timeline-entry-username" th:text="${follower.username}">John Doe</a>
             </span>
 
-            <form th:if="${!follower.following}" action="#" th:action="@{|/follow/${follower.username}|}" th:method="get">
+            <form th:if="${!follower.following}" action="#" th:action="@{|/follow/${follower.username}/${user.username}/follower|}" th:method="get">
                 <button th:attrappend="disabled=${currentUser.username == follower.username}" type="submit" value="Submit" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored">
                     Follow
                 </button>
             </form>
-            <form th:if="${follower.following}" action="#" th:action="@{|/unfollow/${follower.username}|}" th:method="get">
+            <form th:if="${follower.following}" action="#" th:action="@{|/unfollow/${follower.username}/${user.username}/follower|}" th:method="get">
                 <button th:attrappend="disabled=${currentUser.username == follower.username}" type="submit" value="Submit" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" style="color:#f44336;">
                     Unfollow
                 </button>
