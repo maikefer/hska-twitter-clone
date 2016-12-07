@@ -138,3 +138,8 @@ main {
     background-color: #f44336;
     color: white;
 }
+
+.menu-item {
+    text-decoration: none;
+    color: #000 !important;
+}

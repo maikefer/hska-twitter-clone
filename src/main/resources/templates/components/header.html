@@ -21,10 +21,10 @@
 
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
             <li class="mdl-menu__item">
-                <a th:href="@{|/users/${currentUser.username}|}">Show profile</a>
+                <a class="menu-item" th:href="@{|/users/${currentUser.username}|}">Show profile</a>
             </li>
             <li id="logout-btn" class="mdl-menu__item">
-                <a th:href="@{/logout}">Logout</a>
+                <a class="menu-item" th:href="@{/logout}">Logout</a>
             </li>
         </ul>
     </div>
