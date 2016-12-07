@@ -19,7 +19,7 @@ public class LoginController {
 
 	@Autowired
 	private AuthRepository repository;
-	private static final Duration TIMEOUT = Duration.ofMinutes(5);
+	private static final Duration TIMEOUT = Duration.ofMinutes(10);
 
 	public boolean login(User user, HttpServletResponse response) {
 		if (repository.auth(user.getUsername(), user.getPassword())) {
