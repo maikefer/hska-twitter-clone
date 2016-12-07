@@ -147,7 +147,87 @@ key global:postid
     \section{Sessionverwaltung}
 
     \section{MVC Implementierung}
+    \subsection{Fronend}
+	Um redundanten Code zu vermeiden, wurde die Templates in mehrere Fragment aufgeteilt. Thymeleaf bietet die Möglichkeit diese beim parsen einzubinden.
+	
+	Folgende Fragmente wurden erstellt:
+	\begin{itemize} 
+		\item Header
+		\item Footer
+		\item Profil/User
+		\item Timeline
+		\item Post
+	\end{itemize}
 
+	Auf jeder Seite, mit Ausnahme von \textbf{Login} und \textbf{Registrierung} werden die Komponente \textit{Header}, \textit{Footer} und \textit{Profil/User} eingebettet.
+	
+	In der Homepage und der Profilansicht wird zusätzlich die \textit{Timeline} eingebunden.\\
+	
+	\textbf{Beispiel: Profil/User - Fragment:}
+	\begin{lstlisting}[language=html]
+<div class="profile-card mdl-card mdl-shadow--2dp" th:fragment="card">
+ <div id="profile-header" class="mdl-card__title">
+  <h2 id="profile-name" class="mdl-card__title-text" th:text="${user.username}"></h2>
+ </div>
+		
+ <div class="mdl-card__supporting-text">
+  <a th:href="@{|/users/${user.username}/following|}" class="mdl-badge" th:attr="data-badge=${followingCnt}">Following</a>
+  <a th:href="@{|/users/${user.username}/follower|}" class="mdl-badge" th:attr="data-badge=${followerCnt}">Follower</a>
+ </div>
+		
+ <div class="mdl-card__actions" th:if="${!isSelf}">
+  <a th:if="${!isFollowing}" th:href="@{|/follow/${user.username}|}" class="mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="width: 100%;">
+   Follow
+  </a>
+  <a th:if="${isFollowing}" th:href="@{|/unfollow/${user.username}|}" class="warn mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" style="width: 100%;">
+   Unfollow
+  </a>
+ </div>
+</div>
+	\end{lstlisting}
+	\begin{lstlisting}[language=html]
+<!--Profile-->
+<div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone">
+ <div th:replace="components/profile :: card">...</div>
+</div>
+	\end{lstlisting}
+
+    \subsection{Backend}
+	Für jede View existiert ein Controller. Diese implementieren die RequestMappings für das jeweilige View. Die Controller füllen das Model und rendern das View.
+	
+	Zusätzlich wurden weitere Conroller erstellt, welche die Suche und das Folgen/Entfolgen implementieren.\\
+	
+	\textbf{Beispiel: LoginViewController:}
+	\begin{lstlisting}[language=java]
+@Controller
+public class LoginViewController {
+
+ @Autowired
+ private LoginController loginController;
+
+ @RequestMapping(value = "/login", method = RequestMethod.GET)
+ public String showLoginView(Model model) {
+  model.addAttribute("user", new User());
+
+  return "login";
+ }
+
+ @RequestMapping(value = "/login", method = RequestMethod.POST)
+ public String showLoginView(@ModelAttribute("user") User userForm, HttpServletResponse response, Model model) {
+
+ if (userForm.getUsername() != null)
+  if (userForm.getPassword() != null) {
+   if (loginController.login(userForm, response)) {
+    // Redirect user to home
+    return "redirect:/";
+   }
+  }
+
+  model.addAttribute("error", "Password or username is wrong.");
+  return "login";
+ }
+}
+	\end{lstlisting}
 
     % Aufgabe 3
 %    \chapter{Asynchrone Erweiterungen}
