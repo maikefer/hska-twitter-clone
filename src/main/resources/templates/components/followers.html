@@ -1,45 +1,74 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<div class="mdl-card mdl-shadow--2dp timeline-card" th:fragment="followers">
+<div class="mdl-card mdl-shadow--2dp timeline-card" th:fragment="follower">
     <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
         <div class="mdl-tabs__tab-bar">
-            <a id="following-tab" href="#following" class="mdl-tabs__tab is-active">Following</a>
-            <a id="followers-tab" href="#followers" class="mdl-tabs__tab">Followers</a>
+            <a id="following-tab" href="#following" class="mdl-tabs__tab">Following</a>
+            <a id="follower-tab" href="#follower" class="mdl-tabs__tab">Follower</a>
         </div>
 
-		<div class="mdl-tabs__panel is-active" id="following">
-			<div th:replace="components/followers :: entry">...</div>
-			<div th:replace="components/followers :: entry">...</div>
-			<div th:replace="components/followers :: entry">...</div>
-		</div>
+        <div class="mdl-tabs__panel is-active" id="following">
+            <div th:replace="components/followers :: entryFollowing">...</div>
+        </div>
 
-		<div class="mdl-tabs__panel" id="followers">
-			<div th:replace="components/followers :: entry">...</div>
-		</div>
+        <div class="mdl-tabs__panel" id="follower">
+            <div th:replace="components/followers :: entryFollower">...</div>
+        </div>
 
-	</div>
+    </div>
 </div>
 
-<div class="timeline-entry" th:fragment="entry">
-	<ul class="mdl-list timelines-entry-wrapper" style="margin-top: 6px; margin-bottom: 6px">
+<div class="timeline-entry" th:fragment="entryFollowing">
+    <ul class="mdl-list timelines-entry-wrapper" style="margin-top: 6px; margin-bottom: 6px">
 
-		<li class="mdl-list__item" style="padding: 0px 10px 0px 20px">
+        <li th:each="follower : ${listFollowing}" class="mdl-list__item" style="padding: 0px 10px 0px 20px">
 
-		  <span class="mdl-list__item-primary-content">
-               <a th:href="@{/user}">
-                    <i class="material-icons mdl-list__item-avatar">person</i>
-               </a>
-               <a th:href="@{/user}" class="timeline-entry-username">John Doe</a>
+            <span class="mdl-list__item-primary-content">
+                 <a th:href="@{|/users/${follower.username}|}">
+                       <i class="material-icons mdl-list__item-avatar">person</i>
+                 </a>
+                 <a th:href="@{|/users/${follower.username}|}" class="timeline-entry-username" th:text="${follower.username}">John Doe</a>
             </span>
 
-		  <a class="mdl-list__item-secondary-action" th:href="@{/follow-This-User}">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored">
-                Follow
-            </button>
-		  </a>
-		</li>
-	</ul>
+            <form th:if="${!follower.following}" action="#" th:action="@{|/follow/${follower.username}|}" th:method="get">
+                <button th:attrappend="disabled=${currentUser.username == follower.username}" type="submit" value="Submit" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored">
+                    Follow
+                </button>
+            </form>
+            <form th:if="${follower.following}" action="#" th:action="@{|/unfollow/${follower.username}|}" th:method="get">
+                <button th:attrappend="disabled=${currentUser.username == follower.username}" type="submit" value="Submit" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" style="color:#f44336;">
+                    Unfollow
+                </button>
+            </form>
+        </li>
+    </ul>
+</div>
+
+<div class="timeline-entry" th:fragment="entryFollower">
+    <ul class="mdl-list timelines-entry-wrapper" style="margin-top: 6px; margin-bottom: 6px">
+
+        <li th:each="follower : ${listFollower}" class="mdl-list__item" style="padding: 0px 10px 0px 20px">
+
+            <span class="mdl-list__item-primary-content">
+                <a th:href="@{|/users/${follower.username}|}">
+                    <i class="material-icons mdl-list__item-avatar">person</i>
+                </a>
+                <a th:href="@{|/users/${follower.username}|}" class="timeline-entry-username" th:text="${follower.username}">John Doe</a>
+            </span>
+
+            <form th:if="${!follower.following}" action="#" th:action="@{|/follow/${follower.username}|}" th:method="get">
+                <button th:attrappend="disabled=${currentUser.username == follower.username}" type="submit" value="Submit" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored">
+                    Follow
+                </button>
+            </form>
+            <form th:if="${follower.following}" action="#" th:action="@{|/unfollow/${follower.username}|}" th:method="get">
+                <button th:attrappend="disabled=${currentUser.username == follower.username}" type="submit" value="Submit" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored" style="color:#f44336;">
+                    Unfollow
+                </button>
+            </form>
+        </li>
+    </ul>
 </div>
 
 </html>

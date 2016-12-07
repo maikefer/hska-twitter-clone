@@ -133,3 +133,8 @@ main {
     font-size: 12px;
     padding: 0;
 }
+
+.warn {
+    background-color: #f44336;
+    color: white;
+}

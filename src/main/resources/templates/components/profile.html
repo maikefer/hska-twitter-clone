@@ -7,13 +7,16 @@
     </div>
 
     <div class="mdl-card__supporting-text">
-        <a id="btn-following" class="mdl-badge" data-badge="27">Following</a>
-        <a id="btn-followers" class="mdl-badge" data-badge="19">Followers</a>
+        <a th:href="@{|/users/${user.username}/follower?following=true|}" class="mdl-badge" th:attr="data-badge=${followingCnt}">Following</a>
+        <a th:href="@{|/users/${user.username}/follower?follower=true|}" class="mdl-badge" th:attr="data-badge=${followerCnt}">Follower</a>
     </div>
 
     <div class="mdl-card__actions" th:if="${!isSelf}">
-        <a class="mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="width: 100%;">
+        <a th:if="${!isFollowing}" th:href="@{|/follow/${user.username}|}" class="mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" style="width: 100%;">
             Follow
+        </a>
+        <a th:if="${isFollowing}" th:href="@{|/unfollow/${user.username}|}" class="warn mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect" style="width: 100%;">
+            Unfollow
         </a>
     </div>
 </div>

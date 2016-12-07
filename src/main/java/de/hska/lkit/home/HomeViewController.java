@@ -27,9 +27,12 @@ public class HomeViewController {
         User user = userRepository.findUser(SessionSecurity.getName());
         model.addAttribute("user", user);
 
+        // Followers Count
+        model.addAttribute("followingCnt", userRepository.findFollowers(user.getUsername()).size());
+        model.addAttribute("followerCnt", userRepository.findFollowing(user.getUsername()).size());
+
         model.addAttribute("currentUser", user);
         model.addAttribute("isSelf", true);
         return "home";
     }
 }
-
