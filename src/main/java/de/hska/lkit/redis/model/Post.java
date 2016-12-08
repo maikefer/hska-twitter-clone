@@ -2,6 +2,7 @@ package de.hska.lkit.redis.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author essigt
@@ -37,8 +38,8 @@ public class Post implements Serializable {
         this.id = id;
     }
 
-    public LocalDateTime getTimestamp() {
-        return timestamp;
+    public String getTimestamp() {
+        return timestamp.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
     }
 
     public void setTimestamp(LocalDateTime timestamp) {
