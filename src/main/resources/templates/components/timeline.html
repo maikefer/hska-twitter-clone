@@ -12,8 +12,8 @@
             <div th:replace="components/timeline :: entryGlobal">...</div>
         </div>
 
-        <div class="mdl-tabs__panel" id="user">
-            <div th:replace="components/timeline :: entryUser">...</div>
+        <div class="mdl-tabs__panel" id="private">
+            <div th:replace="components/timeline :: entryPrivate">...</div>
         </div>
     </div>
 </div>
@@ -22,7 +22,7 @@
     <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
 
         <div class="mdl-tabs__tab-bar">
-            <a href="#user" class="mdl-tabs__tab">Timeline</a>
+            <a href="#" class="mdl-tabs__tab is-active">Timeline</a>
         </div>
 
         <div class="mdl-tabs__panel is-active" id="userTimeline">
