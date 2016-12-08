@@ -4,18 +4,22 @@ import static de.hska.lkit.redis.repo.KeyUtils.nextUserId;
 import static de.hska.lkit.redis.repo.KeyUtils.user;
 import static de.hska.lkit.redis.repo.KeyUtils.userAll;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.RedisZSetCommands.Range;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.SetOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 import org.springframework.stereotype.Repository;
 
 import de.hska.lkit.redis.model.User;
+import redis.clients.jedis.Jedis;
 
 
 
@@ -30,6 +34,7 @@ public class UserRepository {
 	private StringRedisTemplate stringRedisTemplate;
 	private HashOperations<String, String, String> hashOps;
 	private SetOperations<String, String> setOps;
+	private ZSetOperations<String, String> zsetOps;
 
 
 	@Autowired
@@ -41,16 +46,17 @@ public class UserRepository {
 	private void init() {
 		this.hashOps = this.stringRedisTemplate.opsForHash();
 		this.setOps = this.stringRedisTemplate.opsForSet();
+		this.zsetOps = this.stringRedisTemplate.opsForZSet();
 		this.userid = new RedisAtomicLong( nextUserId() , this.stringRedisTemplate.getConnectionFactory());
 	}
 
 	/**
-	 * Checks if the username is still available
+	 * Checks if the username is still available(not taken jet)
 	 * @param username
 	 * @return
 	 */
 	public boolean isUsernameAvailable(String username) {
-		return !setOps.isMember(userAll(), user(username));
+		return zsetOps.score(userAll(), username) == null;		
 	}
 
 	/**
@@ -69,7 +75,8 @@ public class UserRepository {
 		hashOps.put(key, "password", user.getPassword());
         hashOps.put(key, "email", user.getEmail());
 
-		setOps.add(userAll(), key);
+		//setOps.add(userAll(), key);
+        zsetOps.add(userAll(), user.getUsername(), 0.0);
 	}
 
 	/**
@@ -84,15 +91,17 @@ public class UserRepository {
 			hashOps.delete(key, property);
 		}
 
-		setOps.remove(userAll(), key);
+		//setOps.remove(userAll(), key);
+		zsetOps.remove(userAll(), user.getUsername());
 	}
 
 	/**
 	 * Returns a Set of all usernames
 	 * @return
 	 */
-	public Set<String> findAllUsers() {
-		return setOps.members( userAll() );
+	public long numberOfUsers() {
+		return zsetOps.size( userAll() );
+		
 	}
 
 	/**
@@ -105,7 +114,8 @@ public class UserRepository {
 		User user = new User();
 		String key = user(username);
 
-		if (setOps.isMember(userAll(), key)) {
+		
+		if (zsetOps.score(userAll(), username) != null) {
 			user.setId(hashOps.get(key, "id"));
 			user.setEmail(hashOps.get(key, "email"));
 			user.setUsername(hashOps.get(key, "username"));
@@ -116,6 +126,22 @@ public class UserRepository {
 		return user;
 	}
 
+	
+	/**
+	 * {@link http://stackoverflow.com/a/33865770/7043300}
+	 * @param usernamePrefix
+	 * @return
+	 */
+	public Set<String> searchUser(String usernamePrefix) {
+		//Magicaly works not, too(dafuq?)
+		return zsetOps.rangeByLex(userAll(), Range.range().gte(usernamePrefix).lte(usernamePrefix + "Z"));
+		
+		
+		//Works
+		//Jedis jedis = new Jedis();
+		//return jedis.zrangeByLex(userAll(), "["+ usernamePrefix, "[" + usernamePrefix+"Z");		
+	}
+	
 	/**
 	 *
 	 * @param username

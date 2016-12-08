@@ -2,6 +2,8 @@ package de.hska.lkit.redis.repo;
 
 import static org.junit.Assert.*;
 
+import java.util.Set;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +20,7 @@ public class UserRepositoryIT {
 	@Autowired
 	private UserRepository userRepository;
 
-	private User user;
+	private User user;	
 
 	@Before
 	public void setup() {
@@ -38,9 +40,9 @@ public class UserRepositoryIT {
 	public void createUser() {
 		assertEquals("Username should be still available", true, this.userRepository.isUsernameAvailable(this.user.getUsername()) );
 
-		int numUsersBefore = this.userRepository.findAllUsers().size();
+		long numUsersBefore = this.userRepository.numberOfUsers();
 		this.userRepository.saveUser(this.user);
-		int numUsersAfter = this.userRepository.findAllUsers().size();
+		long numUsersAfter = this.userRepository.numberOfUsers();
 
 		assertEquals("Number of users has increased", 1, numUsersAfter - numUsersBefore);
 
@@ -59,10 +61,23 @@ public class UserRepositoryIT {
 	}
 
 	@Test
+	public void searchUser() {
+		createUser();
+		assertEquals("One user in DB", 1L, this.userRepository.numberOfUsers());
+		
+		Set<String> searchUser = this.userRepository.searchUser("test");
+		System.out.println("Found Users: ");
+		searchUser.forEach(System.out::println);
+		
+		assertEquals("One user found", 1, searchUser.size());
+		deleteUser();
+	}
+	
+	@Test
 	public void deleteUser() {
-		int numUsersBefore = this.userRepository.findAllUsers().size();
+		long numUsersBefore = this.userRepository.numberOfUsers();
 		this.userRepository.deleteUser(this.user);
-		int numUsersAfter = this.userRepository.findAllUsers().size();
+		long numUsersAfter = this.userRepository.numberOfUsers();
 
 		assertEquals("Number of users has decreased", -1, numUsersAfter - numUsersBefore);
 	}
