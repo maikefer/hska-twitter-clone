@@ -52,7 +52,7 @@ public class PostRepositroy {
 		this.redisPost.opsForHash().put( KeyUtils.postAllHash(), id, post);
 
 		// add id of post to list of all posts
-		this.redis.opsForSet().add(KeyUtils.postAll(), id);
+		this.redis.opsForList().leftPush(KeyUtils.postAll(), id);
 
 		//add post to the lost of posts by this user
 		this.redis.opsForList().leftPush( KeyUtils.postOfUser(post.getUser()), id);
@@ -71,8 +71,17 @@ public class PostRepositroy {
 	 *
 	 * @return
 	 */
-	public Map<Object, Object> findAllPosts() {
-		return this.redisPost.opsForHash().entries( KeyUtils.postAllHash() );
+	public List<Post> findAllPosts() {
+		//return this.redisPost.opsForHash().entries( KeyUtils.postAllHash() );
+		List<Post> posts = new ArrayList<>();
+
+		List<String> postIDs = this.redis.opsForList().range( KeyUtils.postAll(), 0, -1);
+
+		for(String id : postIDs) {
+			posts.add( findPost(id));
+		}
+
+		return posts;
 	}
 
 

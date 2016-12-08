@@ -74,3 +74,8 @@ doc.run.xml
 *.gz
 *.bcf
 doc.pdf
+
+#Exclude Jars and Wars
+*.jar
+*.war
+

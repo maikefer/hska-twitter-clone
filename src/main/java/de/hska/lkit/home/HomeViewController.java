@@ -46,7 +46,7 @@ public class HomeViewController {
         model.addAttribute("isSelf", true);
 
         List<Post> privatePosts = postRepository.timelineOfUser(user.getUsername());
-        List<Object> globalPosts = new ArrayList<>(postRepository.findAllPosts().values());
+        List<Post> globalPosts = new ArrayList<>(postRepository.findAllPosts());
 
         model.addAttribute("PostListGlobal", globalPosts);
         model.addAttribute("PostListPrivate", privatePosts);
