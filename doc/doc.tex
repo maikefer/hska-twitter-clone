@@ -143,7 +143,19 @@ key global:postid
     % Aufgabe 2
     \chapter{Seitenbasierte Implementierung}
     \section{Redis Schnittstelle}
-
+		Die Redis Schnittstelle ist in drei Repositories gegliedert, die für User, Post oder Authentifizierung verantwortlich sind, die alle Funktionalität aus ihrem Bereich bereitstellt. 
+		\begin{itemize}
+			\item UserRepository
+			\item PostRepository
+			\item AuthRepository
+		\end{itemize}
+		
+		Die Konfiguration der Redis Datenbank(Host, Port und Passwort), wird in der RedisConfiguration-Klasse gehalten. Um die Konfiguration nicht ändern zu müssen, wenn man die Anwendung Lokal laufen hat(Host: Localhost) und in Docker(Host: redis). Hierzu wird auf eine Umgebungsvariable zurück gegriffen.
+		\begin{lstlisting}[language=java]
+String redisHost = System.getenv()
+		.getOrDefault("REDIS_HOST", "localhost");
+		\end{lstlisting}
+		
     \section{Sessionverwaltung}
 
     \section{MVC Implementierung}
