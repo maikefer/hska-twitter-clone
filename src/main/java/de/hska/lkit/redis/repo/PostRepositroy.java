@@ -41,8 +41,8 @@ public class PostRepositroy {
 	}
 
 	/**
-	 * Save a post
-	 * @param post
+	 * Save a given post
+	 * @param post The Post to be saved
 	 */
 	public void savePost(Post post) {
 		// generate a unique id
@@ -67,12 +67,12 @@ public class PostRepositroy {
 	}
 
 	/**
-	 * returns a list of all users
-	 *
-	 * @return
+	 * Returns all posts ever posted in the wide universe 
+	 * @deprecated Use paged functions instead {@link #findAllPostsPaginaton(int, int)}
+	 * @return A List of Posts
 	 */
+	@Deprecated
 	public List<Post> findAllPosts() {
-		//return this.redisPost.opsForHash().entries( KeyUtils.postAllHash() );
 		List<Post> posts = new ArrayList<>();
 
 		List<String> postIDs = this.redis.opsForList().range( KeyUtils.postAll(), 0, -1);
@@ -83,12 +83,39 @@ public class PostRepositroy {
 
 		return posts;
 	}
+	
+	
+	/**
+	 * Returns the number of all posts
+	 * @return The number of Posts
+	 */
+	public long findAllPostsSize() {
+		return this.redis.opsForList().size( KeyUtils.postAll());
+	}
+	
+	/**
+	 * Returns a subset of all Posts
+	 * @param start The start index, starts with 0
+	 * @param count The number of posts to return
+	 * @return A List of Posts
+	 */
+	public List<Post> findAllPostsPaged(int start, int count) {
+		List<Post> posts = new ArrayList<>();
+
+		List<String> postIDs = this.redis.opsForList().range( KeyUtils.postAll(), start, start + count);
+
+		for(String id : postIDs) {
+			posts.add( findPost(id));
+		}
+
+		return posts;
+	}
 
 
 	/**
-	 *
+	 * Returns the post with the given ID
 	 * @param id
-	 * @return
+	 * @return a Post object
 	 */
 	public Post findPost(String id) {
 		Object obj = this.redisPost.opsForHash().get( KeyUtils.postAllHash(), id);
@@ -97,10 +124,11 @@ public class PostRepositroy {
 
 
 	/**
-	 *
+	 * Returns all Posts of the given user
 	 * @param username
-	 * @return
+	 * @return List of Posts
 	 */
+	@Deprecated
 	public List<Post> findPostsByUser(String username) {
 		List<Post> posts = new ArrayList<>();
 
@@ -112,16 +140,75 @@ public class PostRepositroy {
 
 		return posts;
 	}
-
+	
+	
 	/**
-	 *
+	 * The number of posts by a given user
 	 * @param username
 	 * @return
 	 */
+	public Long findPostsByUserSize(String username) {
+		return this.redis.opsForList().size( KeyUtils.postOfUser(username));
+	}
+	
+	
+	/**
+	 * Returns a subset of all Posts by the given user
+	 * @param username
+	 * @param start The start index, starts with 0
+	 * @param count The number of posts to return
+	 * @return A List of Post
+	 */
+	public List<Post> findPostsByUserPaged(String username, int start, int count) {
+		List<Post> posts = new ArrayList<>();
+
+		List<String> postIDs = this.redis.opsForList().range( KeyUtils.postOfUser(username), start, start + count);
+
+		for(String id : postIDs) {
+			posts.add( findPost(id));
+		}
+
+		return posts;
+	}
+
+	/**
+	 * Returns all posts for the given user to be shown
+	 * @deprecated Use paged version instead {@link #timelineOfUserPaged(String, int, int)}
+	 * @param username
+	 * @return List of Posts
+	 */
+	@Deprecated
 	public List<Post> timelineOfUser(String username) {
 		List<Post> posts = new ArrayList<>();
 
 		List<String> postIDs = this.redis.opsForList().range( KeyUtils.timeline(username), 0, -1);
+
+		for(String id : postIDs) {
+			posts.add( findPost(id));
+		}
+		return posts;
+	}
+	
+	
+	/**
+	 * The number of posts of the timeline for the given user
+	 * @param username
+	 * @return
+	 */
+	public long timelineOfUserSize(String username) {
+		return this.redis.opsForList().size( KeyUtils.timeline(username));
+	}		
+	
+	
+	/**
+	 * Returns all posts for the given user to be shown
+	 * @param username
+	 * @return List of Posts
+	 */
+	public List<Post> timelineOfUserPaged(String username, int start, int count) {
+		List<Post> posts = new ArrayList<>();
+
+		List<String> postIDs = this.redis.opsForList().range( KeyUtils.timeline(username), start, start + count);
 
 		for(String id : postIDs) {
 			posts.add( findPost(id));
