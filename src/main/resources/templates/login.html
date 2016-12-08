@@ -84,11 +84,12 @@
                 </div>
 
                 <div class="mdl-cell mdl-cell--3-col mdl-cell--8-col-tablet mdl-cell--hide-phone mdl-card content-box">
-                    <h4>What's on right now?</h4>
+                    <h4>Most recent posts</h4>
                     <ul class="mdl-list">
-                        <li class="mdl-list__item">Post 1</li>
-                        <li class="mdl-list__item">Post 2</li>
-                        <li class="mdl-list__item">Post 3</li>
+                        <li class="mdl-list__item login-post-list" th:each="post : ${posts}">
+                            <div class="login-post-header" th:text="${post.user}"></div>
+                            <div class="login-post-message" th:text="${post.message}"></div>
+                        </li>
                     </ul>
                 </div>
 
