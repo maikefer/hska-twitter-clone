@@ -157,7 +157,117 @@ String redisHost = System.getenv()
 		\end{lstlisting}
 		
     \section{Sessionverwaltung}
+    Die Sessionverwaltung besteht aus vier Teilen:
+    	\begin{itemize} 
+    	\item LoginController
+    	\item CookieInterceptor
+    	\item SessionSecurity
+    	\item Configuration
+    \end{itemize}
+\subsection{LoginController}
+	Aktive Sessions werden in der Redis Datenbank gespeichert. Es wird ein Authentifizierungstoken mit dem entsprechenden (eindeutigen) Username verknüpft. Beim Login prüft der \textbf{LoginController}, ob Benutzername und Passwort korrekt sind, erstellt ggf. das Authentifizierungstoken und fügt es in die Datenbank ein. Des Weiteren wird das Token mit einem Timeout versehen, sodass es nach 10min automatisch aus der Datenbank gelöscht wird und die Session somit verfällt. Zuletzt wird das Token noch in einem Cookie abgelegt, damit für weitere Anfragen die Session bestehen bleibt.
+	\begin{lstlisting}[language=java]
+public class LoginController {
+	
+ @Autowired
+ private AuthRepository repository;
+ private static final Duration TIMEOUT = Duration.ofMinutes(10);
 
+ public boolean login(User user, HttpServletResponse response) {
+  if (repository.auth(user.getUsername(), user.getPassword())) {
+   String auth = repository.addAuth(user.getUsername(), TIMEOUT.getSeconds(), TimeUnit.SECONDS);
+   Cookie cookie = new Cookie("auth", auth);
+   response.addCookie(cookie);
+   SessionSecurity.set(user.getUsername(), auth);
+   return true;
+  }
+
+  // Login not valid
+  return false;
+ }
+
+ @RequestMapping(value = "/logout")
+ public String logout() {
+  if (isLoggedIn()) {
+   String username = SessionSecurity.getName();
+   repository.deleteAuth(username);
+   SessionSecurity.clear();
+  }
+
+  return "redirect:/login";
+ }
+
+ public boolean isLoggedIn() {
+  return repository.isAuthValid(SessionSecurity.getToken()).equals(SessionSecurity.getName());
+ }
+}
+	\end{lstlisting}
+	
+	\subsection{CookieInterceptor}
+	Sobald sich ein User eingeloggt hat, übernimmt der \textbf{CookieInterceptor}. Dieser wird bei Folgeanfragen ausgeführt und überprüft die Gültigkeit des Tokens. Ist es ungültig, erfolgt ein redirect zur Login-Seite.
+	\begin{lstlisting}[language=java]
+@Override
+public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) throws Exception {
+Cookie[] cookies = req.getCookies();
+if (!ObjectUtils.isEmpty(cookies))
+ for (Cookie cookie : cookies)
+  if (cookie.getName().equals("auth")) {
+   String auth = cookie.getValue();
+   if (auth != null && redis != null) {
+    String username = redis.isAuthValid(auth);
+    if (username != null) {
+     SessionSecurity.set(username, auth);
+     return true;
+    }
+   }
+  }
+
+  SessionSecurity.clear();
+  res.sendRedirect("/login");
+  return false;
+}
+	\end{lstlisting}
+	
+	\subsection{SessionSecurity}
+	Die statische \textbf{SessionSecurity}-Klasse dient als lokaler Zwischenspeicher für den zuletzt verwendeten Token und Username. Im Kern hält die Klasse eine Threadabhängige Variable vom Typ SessionData:
+	\begin{lstlisting}[language=java]
+private static class SessionData {
+String username;
+String token;
+
+ public SessionData(String un, String t) {
+  username = un;
+  token = t;
+ }
+}
+	\end{lstlisting}
+	
+	\subsection{Configuration}
+	Die \textbf{WebConfig}-Klasse dient zur Konfiguration des \textbf{CookieInterceptor}.
+	\begin{lstlisting}[language=java]
+@Configuration
+public class WebConfig extends WebMvcConfigurerAdapter {
+
+
+ @Override
+ public void addInterceptors(InterceptorRegistry registry) {
+  registry.addInterceptor(localeChangeInterceptor());
+  registry.addInterceptor(cookieInterceptor()).excludePathPatterns("/login/**").excludePathPatterns("/registration/**").excludePathPatterns("/error/**");
+ }
+
+ @Bean
+ public CookieInterceptor cookieInterceptor() {
+  return new CookieInterceptor();
+ }
+
+ @Bean
+ public LocaleChangeInterceptor localeChangeInterceptor() {
+  return new LocaleChangeInterceptor();
+ }
+}
+	\end{lstlisting}
+	Die Konfiguration registriert den \textbf{CookieInterceptor}, sodass er bei jeder Anfrage von der Login- oder Register-Seite ausgeführt wird. Die beiden mit @Bean gekennzeichneten Factory-Methoden erlauben Spring die jeweiligen Objektinstanzen zu verwalten. Dadurch werden beide Objekte auch für Dependency Injection verfügbar.
+	
     \section{MVC Implementierung}
     \subsection{Fronend}
 	Um redundanten Code zu vermeiden, wurde die Templates in mehrere Fragment aufgeteilt. Thymeleaf bietet die Möglichkeit diese beim parsen einzubinden.

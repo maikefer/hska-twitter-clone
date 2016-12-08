@@ -16,8 +16,10 @@ import redis.clients.jedis.JedisPoolConfig;
 public class RedisConfiguration {
 	@Bean
 	public RedisConnectionFactory getConnectionFactory() {
+		String redisHost = System.getenv().getOrDefault("REDIS_HOST", "localhost");
+
 		JedisConnectionFactory jRedisConnectionFactory = new JedisConnectionFactory(new JedisPoolConfig());
-		jRedisConnectionFactory.setHostName("localhost");
+		jRedisConnectionFactory.setHostName(redisHost);
 		jRedisConnectionFactory.setPort(6379);
 		jRedisConnectionFactory.setPassword("");
 		return jRedisConnectionFactory;
@@ -29,7 +31,7 @@ public class RedisConfiguration {
 		stringRedisTemplate.setKeySerializer(new StringRedisSerializer());
 		stringRedisTemplate.setHashValueSerializer(new StringRedisSerializer());
 		stringRedisTemplate.setValueSerializer(new StringRedisSerializer());
-				
+
 		return stringRedisTemplate;
 	}
 
@@ -39,7 +41,7 @@ public class RedisConfiguration {
 		redisTemplate.setConnectionFactory(getConnectionFactory());
 		return redisTemplate;
 	}
-	
+
 	@Bean(name = "redisPostTemplate")
 	public RedisTemplate<String, Post> getRedisPostTemplate() {
 		RedisTemplate<String, Post> redisTemplate = new RedisTemplate<String, Post>();

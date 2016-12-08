@@ -10,5 +10,14 @@ Twitter-Clone mit Spring-Boot, Spring Web, Redis und Bootstrap
   - Starten über Panel links unten: Boot Dashboard
   - Im Browser aufrufen unten http://localhost:8080/greeting
   
-## Setup Redis
-  - TODO: How to setup Redis(docker image)
+## Docker-Compose
+
+```bash
+cd src/main/docker/
+docker-compose up
+```
+
+![Screenshot of HAProxy stats and docker-compose logs](doc/images/haproxy.png)
+
+  
+  
