@@ -1,6 +1,8 @@
 package de.hska.lkit.user;
 
+import de.hska.lkit.redis.model.Post;
 import de.hska.lkit.redis.model.User;
+import de.hska.lkit.redis.repo.PostRepositroy;
 import de.hska.lkit.redis.repo.UserRepository;
 import de.hska.lkit.sessions.SessionSecurity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class UserViewController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PostRepositroy postRepository;
 
     @SuppressWarnings("Duplicates")
     @RequestMapping(value = "/users/{username}")
@@ -59,6 +64,9 @@ public class UserViewController {
         // Follower Count
         model.addAttribute("followingCnt", follower.size());
         model.addAttribute("followerCnt", following.size());
+
+        List<Post> userPosts = postRepository.findPostsByUser(user.getUsername());
+        model.addAttribute("PostListUser", userPosts);
 
         model.addAttribute("isSelf", SessionSecurity.getName().equals(user.getUsername()));
         return "user";

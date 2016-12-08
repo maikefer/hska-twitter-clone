@@ -4,80 +4,81 @@
 <head>
     <title>Home</title>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!--<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen" />-->
-    <link th:href="@{/webjars/material-design-lite/1.2.0/material.min.css}" rel="stylesheet" />
-    <link th:href="@{/css/main.css}" href="../static/css/main.css" rel="stylesheet" />
-    <link th:href="@{/css/home.css}" href="../static/css/home.css" rel="stylesheet" />
+    <link th:href="@{/webjars/material-design-lite/1.2.0/material.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main.css}" href="../static/css/main.css" rel="stylesheet"/>
+    <link th:href="@{/css/home.css}" href="../static/css/home.css" rel="stylesheet"/>
 </head>
 
 <body>
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <!--navbar-->
-        <div th:replace="components/header :: header">...</div>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <!--navbar-->
+    <div th:replace="components/header :: header">...</div>
 
-        <main class="mdl-layout__content">
+    <main class="mdl-layout__content">
 
-            <!--main content-->
-            <div class="page-content">
-                <div class="mdl-grid" style="margin: 0; padding-bottom: 0;">
-                    <!--Spacer-->
-                    <div class="mdl-cell mdl-cell--1-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+        <!--main content-->
+        <div class="page-content">
+            <div class="mdl-grid" style="margin: 0; padding-bottom: 0;">
+                <!--Spacer-->
+                <div class="mdl-cell mdl-cell--1-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
 
-                    <!--Profile-->
-                    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone">
-                        <div th:replace="components/profile :: card">...</div>
-                    </div>
+                <!--Profile-->
+                <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone">
+                    <div th:replace="components/profile :: card">...</div>
+                </div>
 
-                    <!--Timeline-->
-                    <div class="mdl-cell mdl-cell--6-col mdl-cell--5-col-tablet mdl-cell--4-col-phone timeline">
-                        <div class="mdl-card mdl-shadow--2dp new-message-card" style="padding: 20px;">
+                <div class="mdl-cell mdl-cell--6-col mdl-cell--5-col-tablet mdl-cell--4-col-phone timeline">
+                    <!-- post input -->
+                    <div class="mdl-card mdl-shadow--2dp new-message-card" style="padding: 20px;">
 
-                            <form action="#">
-                                <div class="mdl-textfield mdl-js-textfield"
-                                style="margin-top: -15px; margin-bottom: -25px; width: 100%">
-                                    <textarea class="mdl-textfield__input" type="text" rows= "3" id="sample5" ></textarea>
-                                    <label class="mdl-textfield__label" for="sample5">Your message here</label>
-                                </div>
-                            </form>
+                        <form action="#" th:action="@{/post}" th:object="${postTextForm}" method="post">
+                            <div class="mdl-textfield mdl-js-textfield"
+                                 style="margin-top: -15px; margin-bottom: -25px; width: 100%">
+
+                                <input class="mdl-textfield__input" type="text" th:object="${postText}"
+                                       alt="Your message here"
+                                       maxlength="140" id="postText" name="postText"/>
+                            </div>
 
                             <div class="mdl-grid button-container">
 
-                                <div class="mdl-cell mdl-cell--8-col mdl-cell--hide-tablet mdl-cell--hide-phone">
+                                <div class="mdl-cell mdl-cell--9-col mdl-cell--hide-tablet mdl-cell--hide-phone">
                                     <!-- Spacer -->
                                 </div>
 
-                                <div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--1-col-phone counter-font">
+                                <div class="mdl-cell mdl-cell--1-col mdl-cell--2-col-tablet mdl-cell--1-col-phone counter-font">
                                     140
                                 </div>
 
-                                <div class="mdl-cell mdl-cell--3-col mdl-cell--7-col-tablet mdl-cell--3-col-phone" style="text-align: right">
-                                    <button class="send-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored" style="width: 100%">
-                                        <i class="material-icons">send</i>
-                                        Send
-                                    </button>
+                                <div class="mdl-cell mdl-cell--2-col mdl-cell--6-col-tablet mdl-cell--2-col-phone"
+                                     style="text-align: right">
+                                    <input type="submit" value="Send"
+                                           class="send-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored"/>
                                 </div>
                             </div>
-
-                        </div>
-
-                        <div th:replace="components/timeline :: timeline">...</div>
+                        </form>
                     </div>
 
-                    <!--Spacer-->
-                    <div class="mdl-cell mdl-cell--3-col mdl-cell--1-col-tablet mdl-cell--hide-phone"></div>
+                    <!-- timelines -->
+                    <div th:replace="components/timeline :: timeline">...</div>
                 </div>
+
+                <!--Spacer-->
+                <div class="mdl-cell mdl-cell--3-col mdl-cell--1-col-tablet mdl-cell--hide-phone"></div>
             </div>
+        </div>
 
-        </main>
-    </div>
+    </main>
+</div>
 
-    <script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
-    <!--<script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>-->
-    <script th:src="@{/webjars/material-design-lite/1.2.0/material.min.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
-    <!--<script th:src="@{/js/home.js}"></script>-->
+<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+<!--<script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>-->
+<script th:src="@{/webjars/material-design-lite/1.2.0/material.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<!--<script th:src="@{/js/home.js}"></script>-->
 </body>
 
 </html>

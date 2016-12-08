@@ -6,44 +6,94 @@
         <div class="mdl-tabs__tab-bar">
             <a href="#global" class="mdl-tabs__tab is-active">Global Timeline</a>
             <a href="#private" class="mdl-tabs__tab">Private Timeline</a>
-            <a href="#user" class="mdl-tabs__tab">Timeline</a>
         </div>
 
         <div class="mdl-tabs__panel is-active" id="global">
-            <div th:replace="components/timeline :: entry">...</div>
-            <div th:replace="components/timeline :: entry">...</div>
-            <div th:replace="components/timeline :: entry">...</div>
-        </div>
-
-        <div class="mdl-tabs__panel" id="private">
-            <div th:replace="components/timeline :: entry">...</div>
+            <div th:replace="components/timeline :: entryGlobal">...</div>
         </div>
 
         <div class="mdl-tabs__panel" id="user">
-            <div th:replace="components/timeline :: entry">...</div>
+            <div th:replace="components/timeline :: entryUser">...</div>
         </div>
     </div>
 </div>
 
-<div class="timeline-entry" th:fragment="entry">
+<div class="mdl-card mdl-shadow--2dp timeline-card" th:fragment="timelineUser">
+    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+
+        <div class="mdl-tabs__tab-bar">
+            <a href="#user" class="mdl-tabs__tab">Timeline</a>
+        </div>
+
+        <div class="mdl-tabs__panel is-active" id="userTimeline">
+            <div th:replace="components/timeline :: entryUser">...</div>
+        </div>
+    </div>
+</div>
+
+<div class="timeline-entry" th:fragment="entryGlobal">
     <ul class="mdl-list timeline-entry-wrapper">
-        <li class="mdl-list__item mdl-list__item--two-line" style="padding-right: 10px;">
+        <li th:each="post : ${PostListGlobal}" class="mdl-list__item mdl-list__item--two-line"
+            style="padding-right: 10px;">
             <span class="mdl-list__item-primary-content">
-                <a th:href="@{/user}">
+                <a th:href="@{/users/${post.user}}">
                     <i class="material-icons mdl-list__item-avatar">person</i>
                 </a>
-                <a th:href="@{/user}" class="timeline-entry-username">Frank's Gang</a>
-                <span class="mdl-list__item-sub-title">
-                      Lorem Ipsum is simply dummy text of the
-                      printing and typesetting industry. Lorem
-                      Ipsum has been the industry's standard dummy
+                <a th:href="@{|/users/${post.user}|}" class="timeline-entry-username"
+                   th:text="${post.user}">John Doe</a>
+                <span class="mdl-list__item-sub-title" th:text="${post.message}">
+                      MyPost
                 </span>
             </span>
             <span class="mdl-list__item-secondary-content timeline-entry-date-container">
-              <span class="mdl-list__item-secondary-info timeline-entry-date">25.10.2016 16:35</span>
+              <span class="mdl-list__item-secondary-info timeline-entry-date"
+                    th:text="${post.timestamp}">25.10.2016 16:35</span>
             </span>
         </li>
     </ul>
 </div>
 
+<div class="timeline-entry" th:fragment="entryPrivate">
+    <ul class="mdl-list timeline-entry-wrapper">
+        <li th:each="post : ${PostListPrivate}" class="mdl-list__item mdl-list__item--two-line"
+            style="padding-right: 10px;">
+            <span class="mdl-list__item-primary-content">
+                <a th:href="@{/users/${post.user}}">
+                    <i class="material-icons mdl-list__item-avatar">person</i>
+                </a>
+                <a th:href="@{|/users/${post.user}|}" class="timeline-entry-username"
+                   th:text="${post.user}">John Doe</a>
+                <span class="mdl-list__item-sub-title" th:text="${post.message}">
+                      MyPost
+                </span>
+            </span>
+            <span class="mdl-list__item-secondary-content timeline-entry-date-container">
+              <span class="mdl-list__item-secondary-info timeline-entry-date"
+                    th:text="${post.timestamp}">25.10.2016 16:35</span>
+            </span>
+        </li>
+    </ul>
+</div>
+
+<div class="timeline-entry" th:fragment="entryUser">
+    <ul class="mdl-list timeline-entry-wrapper">
+        <li th:each="post : ${PostListUser}" class="mdl-list__item mdl-list__item--two-line"
+            style="padding-right: 10px;">
+            <span class="mdl-list__item-primary-content">
+                <a th:href="@{/users/${post.user}}">
+                    <i class="material-icons mdl-list__item-avatar">person</i>
+                </a>
+                <a th:href="@{|/users/${post.user}|}" class="timeline-entry-username"
+                   th:text="${post.user}">John Doe</a>
+                <span class="mdl-list__item-sub-title" th:text="${post.message}">
+                      MyPost
+                </span>
+            </span>
+            <span class="mdl-list__item-secondary-content timeline-entry-date-container">
+              <span class="mdl-list__item-secondary-info timeline-entry-date"
+                    th:text="${post.timestamp}">25.10.2016 16:35</span>
+            </span>
+        </li>
+    </ul>
+</div>
 </html>
