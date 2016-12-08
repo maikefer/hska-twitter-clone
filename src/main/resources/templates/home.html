@@ -35,12 +35,8 @@
                     <div class="mdl-card mdl-shadow--2dp new-message-card" style="padding: 20px;">
 
                         <form action="#" th:action="@{/post}" th:object="${postTextForm}" method="post">
-                            <div class="mdl-textfield mdl-js-textfield"
-                                 style="margin-top: -15px; margin-bottom: -25px; width: 100%">
-
-                                <input class="mdl-textfield__input" type="text" th:object="${postText}"
-                                       alt="Your message here"
-                                       maxlength="140" id="postText" name="postText"/>
+                            <div class="mdl-textfield mdl-js-textfield" style="margin-top: -15px; margin-bottom: -25px; width: 100%">
+                                <textarea class="mdl-textfield__input" type="text" th:object="${postText}" alt="Your message here" maxlength="140" id="postText" name="postText"/>
                             </div>
 
                             <div class="mdl-grid button-container">
@@ -49,14 +45,12 @@
                                     <!-- Spacer -->
                                 </div>
 
-                                <div id="counter"
-                                     class="mdl-cell mdl-cell--1-col mdl-cell--2-col-tablet mdl-cell--1-col-phone counter-font">
+                                <div id="counter" class="mdl-cell mdl-cell--1-col mdl-cell--2-col-tablet mdl-cell--1-col-phone counter-font">
+                                    140
                                 </div>
 
-                                <div class="mdl-cell mdl-cell--2-col mdl-cell--6-col-tablet mdl-cell--2-col-phone"
-                                     style="text-align: right">
-                                    <input type="submit" value="Send"
-                                           class="send-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored"/>
+                                <div class="mdl-cell mdl-cell--2-col mdl-cell--6-col-tablet mdl-cell--2-col-phone" style="text-align: right">
+                                    <input type="submit" value="Send" class="send-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored"/>
                                 </div>
                             </div>
                         </form>
@@ -77,8 +71,8 @@
 <script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
 <!--<script th:src="@{/webjars/bootstrap/3.3.7/js/bootstrap.min.js}"></script>-->
 <script th:src="@{/webjars/material-design-lite/1.2.0/material.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/home.js}"></script>
-<!--<script th:src="@{/js/home.js}"></script>-->
 </body>
 
 </html>
