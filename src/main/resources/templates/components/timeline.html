@@ -32,7 +32,7 @@
 </div>
 
 <div class="timeline-entry" th:fragment="entryGlobal">
-    <ul class="mdl-list timeline-entry-wrapper">
+    <ul id="global-timeline" class="mdl-list timeline-entry-wrapper">
         <li th:each="post : ${PostListGlobal}" class="mdl-list__item mdl-list__item--two-line"
             style="padding-right: 10px;">
             <span class="mdl-list__item-primary-content">
@@ -54,7 +54,7 @@
 </div>
 
 <div class="timeline-entry" th:fragment="entryPrivate">
-    <ul class="mdl-list timeline-entry-wrapper">
+    <ul id="private-timeline" class="mdl-list timeline-entry-wrapper">
         <li th:each="post : ${PostListPrivate}" class="mdl-list__item mdl-list__item--two-line"
             style="padding-right: 10px;">
             <span class="mdl-list__item-primary-content">
