@@ -2,7 +2,7 @@ package de.hska.lkit.home;
 
 import de.hska.lkit.redis.model.Post;
 import de.hska.lkit.redis.model.User;
-import de.hska.lkit.redis.repo.PostRepositroy;
+import de.hska.lkit.redis.repo.PostRepository;
 import de.hska.lkit.redis.repo.UserRepository;
 import de.hska.lkit.sessions.SessionSecurity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class HomeViewController {
     private UserRepository userRepository;
 
     @Autowired
-    private PostRepositroy postRepository;
+    private PostRepository postRepository;
 
     @RequestMapping(value = "/")
     public String showHomeView(Model model) {

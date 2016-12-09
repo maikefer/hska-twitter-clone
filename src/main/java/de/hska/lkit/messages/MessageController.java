@@ -1,7 +1,7 @@
 package de.hska.lkit.messages;
 
 import de.hska.lkit.redis.model.Post;
-import de.hska.lkit.redis.repo.PostRepositroy;
+import de.hska.lkit.redis.repo.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Controller;
 public class MessageController {
 
     @Autowired
-    private PostRepositroy postRepository;
+    private PostRepository postRepository;
 
     @MessageMapping("/post")
     @SendTo("/topic/posts")

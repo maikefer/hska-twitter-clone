@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 import de.hska.lkit.redis.model.Post;
 
 @Repository
-public class PostRepositroy {
+public class PostRepository {
 
 	private UserRepository userRepository;
 
@@ -29,7 +29,7 @@ public class PostRepositroy {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	public PostRepositroy(RedisTemplate<String, Post> redisPost, StringRedisTemplate stringRedisTemplate, UserRepository userRepository) {
+	public PostRepository(RedisTemplate<String, Post> redisPost, StringRedisTemplate stringRedisTemplate, UserRepository userRepository) {
 		this.redisPost = redisPost;
 		this.redis = stringRedisTemplate;
 		this.userRepository = userRepository;
@@ -67,7 +67,7 @@ public class PostRepositroy {
 	}
 
 	/**
-	 * Returns all posts ever posted in the wide universe 
+	 * Returns all posts ever posted in the wide universe
 	 * @deprecated Use paged functions instead {@link #findAllPostsPaginaton(int, int)}
 	 * @return A List of Posts
 	 */
@@ -83,8 +83,8 @@ public class PostRepositroy {
 
 		return posts;
 	}
-	
-	
+
+
 	/**
 	 * Returns the number of all posts
 	 * @return The number of Posts
@@ -92,7 +92,7 @@ public class PostRepositroy {
 	public long findAllPostsSize() {
 		return this.redis.opsForList().size( KeyUtils.postAll());
 	}
-	
+
 	/**
 	 * Returns a subset of all Posts
 	 * @param start The start index, starts with 0
@@ -140,8 +140,8 @@ public class PostRepositroy {
 
 		return posts;
 	}
-	
-	
+
+
 	/**
 	 * The number of posts by a given user
 	 * @param username
@@ -150,8 +150,8 @@ public class PostRepositroy {
 	public Long findPostsByUserSize(String username) {
 		return this.redis.opsForList().size( KeyUtils.postOfUser(username));
 	}
-	
-	
+
+
 	/**
 	 * Returns a subset of all Posts by the given user
 	 * @param username
@@ -188,8 +188,8 @@ public class PostRepositroy {
 		}
 		return posts;
 	}
-	
-	
+
+
 	/**
 	 * The number of posts of the timeline for the given user
 	 * @param username
@@ -197,9 +197,9 @@ public class PostRepositroy {
 	 */
 	public long timelineOfUserSize(String username) {
 		return this.redis.opsForList().size( KeyUtils.timeline(username));
-	}		
-	
-	
+	}
+
+
 	/**
 	 * Returns all posts for the given user to be shown
 	 * @param username

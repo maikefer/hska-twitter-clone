@@ -2,7 +2,7 @@ package de.hska.lkit.login;
 
 import de.hska.lkit.redis.model.Post;
 import de.hska.lkit.redis.model.User;
-import de.hska.lkit.redis.repo.PostRepositroy;
+import de.hska.lkit.redis.repo.PostRepository;
 import de.hska.lkit.sessions.LoginController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ public class LoginViewController {
     private LoginController loginController;
 
     @Autowired
-    private PostRepositroy postRepository;
+    private PostRepository postRepository;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String showLoginView(Model model) {

@@ -2,7 +2,7 @@ package de.hska.lkit.user;
 
 import de.hska.lkit.redis.model.Post;
 import de.hska.lkit.redis.model.User;
-import de.hska.lkit.redis.repo.PostRepositroy;
+import de.hska.lkit.redis.repo.PostRepository;
 import de.hska.lkit.redis.repo.UserRepository;
 import de.hska.lkit.sessions.SessionSecurity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class  UserViewController {
     private UserRepository userRepository;
 
     @Autowired
-    private PostRepositroy postRepository;
+    private PostRepository postRepository;
 
     @SuppressWarnings("Duplicates")
     @RequestMapping(value = "/users/{username}")
