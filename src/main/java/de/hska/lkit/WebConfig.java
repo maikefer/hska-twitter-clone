@@ -13,15 +13,13 @@ import de.hska.lkit.sessions.PathLoggerInterceptor;
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(localeChangeInterceptor());
 		registry.addInterceptor(cookieInterceptor())
 			.excludePathPatterns("/login/**")
 			.excludePathPatterns("/registration/**")
-			.excludePathPatterns("/error/**")
-			/*.addPathPatterns("/auth/**")*/;
+            .excludePathPatterns("/error/**");
 		registry.addInterceptor(pathLoggerInterceptor());
 	}
 
@@ -29,7 +27,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	public CookieInterceptor cookieInterceptor() {
 	    return new CookieInterceptor();
 	}
-	
+
 	@Bean
 	public PathLoggerInterceptor pathLoggerInterceptor() {
 	    return new PathLoggerInterceptor();
