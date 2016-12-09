@@ -83,15 +83,13 @@
                 <a th:href="@{/users/${post.user}}">
                     <i class="material-icons mdl-list__item-avatar">person</i>
                 </a>
-                <a th:href="@{|/users/${post.user}|}" class="timeline-entry-username"
-                   th:text="${post.user}">John Doe</a>
+                <a th:href="@{|/users/${post.user}|}" class="timeline-entry-username" th:text="${post.user}">John Doe</a>
                 <span class="mdl-list__item-sub-title message" th:text="${post.message}">
-                      MyPost
+                    MyPost
                 </span>
             </span>
             <span class="mdl-list__item-secondary-content timeline-entry-date-container">
-              <span class="mdl-list__item-secondary-info timeline-entry-date"
-                    th:text="${post.timestamp}">25.10.2016 16:35</span>
+                <span class="mdl-list__item-secondary-info timeline-entry-date" th:text="${post.timestamp}">25.10.2016 16:35</span>
             </span>
         </li>
     </ul>
