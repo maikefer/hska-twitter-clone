@@ -90,10 +90,12 @@ public class UserRepositoryIT {
 		this.userRepository.startFollowUser(user1, user2);
 		assertTrue("User2 is a follower of User1",  this.userRepository.findFollowers(user1).contains(user2));
 		assertTrue("User2 is following User1",  this.userRepository.findFollowing(user2).contains(user1));
+		assertTrue("User2 ist follower of User1", this.userRepository.isFollower(user2, user1));
 
 		this.userRepository.stopFollowUser(user1, user2);
 		assertFalse("User2 is not a follower of User1 anymore",  this.userRepository.findFollowers(user1).contains(user2));
 		assertFalse("User2 is not following User1 anymore",  this.userRepository.findFollowing(user2).contains(user1));
+		assertFalse("User2 is not a follower of User1", this.userRepository.isFollower(user2, user1));
 	}
 
 }

@@ -189,5 +189,15 @@ public class UserRepository {
 	}
 
 
+	/**
+	 * 
+	 * @param username
+	 * @param of
+	 * @return
+	 */
+	public boolean isFollower(String username, String of) {
+		String key = KeyUtils.follower(of);
+		return setOps.isMember(key, username);
+	}
 
 }
