@@ -104,11 +104,8 @@ function postReceived(post) {
   if (path === '/') {
     if (obj.user === currentUser) { // Append to global AND private timeline
       appendPost(obj, true);
-    } else { // Global timeline only
-      if (false) // Check if its a post from a followed user
-        appendPost(obj, true);
-      else
-        appendPost(obj);
+    } else {
+      checkForFollower(obj)
     }
   } else if (path !== '/login' && path !== 'registration') {
     showNotification(obj);
@@ -163,4 +160,19 @@ function showNotification(post) {
 
   // Show notification
   snackbarContainer.MaterialSnackbar.showSnackbar(data);
+}
+
+/**
+ * Checks if the post is from a user the currentUser follows
+ * @param post
+ */
+function checkForFollower(post) {
+  var uri = '/isfollower?username=' + currentUser + '&follower=' + post.user;
+
+  $.get(uri, function(response) {
+    if (response.isFollower)
+      appendPost(post, true);
+    else
+      appendPost(post);
+  });
 }

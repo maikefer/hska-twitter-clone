@@ -17,38 +17,35 @@
         <!--navbar-->
         <div th:replace="components/header :: header">...</div>
 
+        <!--main content-->
         <main class="mdl-layout__content">
+            <div class="mdl-grid" style="margin: 0; padding-bottom: 0;">
+                <!--Spacer-->
+                <div class="mdl-cell mdl-cell--1-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
 
-            <!--main content-->
-            <div class="page-content">
-                <div class="mdl-grid" style="margin: 0; padding-bottom: 0;">
-                    <!--Spacer-->
-                    <div class="mdl-cell mdl-cell--1-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
-
-                    <!--Profile-->
-                    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone">
-                        <div th:replace="components/profile :: card">...</div>
-                    </div>
-
-                    <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-phone timeline">
-                        <!-- post input -->
-                        <div class="mdl-card mdl-shadow--2dp new-message-card" style="padding: 20px;">
-                            <div class="mdl-textfield mdl-js-textfield" style="margin-top: -15px; margin-bottom: -25px; width: 100%">
-                                <textarea class="mdl-textfield__input" type="text" placeholder="Share something..." maxlength="140" id="postText" name="postText" ></textarea>
-                            </div>
-                            <div class="button-container">
-                                <div id="counter" class="counter-font">140</div>
-                                <button class="send-button mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="createPost();">Send</button>
-                            </div>
-                        </div>
-
-                        <!-- timelines -->
-                        <div th:replace="components/timeline :: timeline">...</div>
-                    </div>
-
-                    <!--Spacer-->
-                    <div class="mdl-cell mdl-cell--3-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+                <!--Profile-->
+                <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone">
+                    <div th:replace="components/profile :: card">...</div>
                 </div>
+
+                <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-phone timeline">
+                    <!-- post input -->
+                    <div class="mdl-card mdl-shadow--2dp new-message-card" style="padding: 20px;">
+                        <div class="mdl-textfield mdl-js-textfield" style="margin-top: -15px; margin-bottom: -25px; width: 100%">
+                            <textarea class="mdl-textfield__input" type="text" placeholder="Share something..." maxlength="140" id="postText" name="postText" ></textarea>
+                        </div>
+                        <div class="button-container">
+                            <div id="counter" class="counter-font">140</div>
+                            <button class="send-button mdl-button mdl-button--raised mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="createPost();">Send</button>
+                        </div>
+                    </div>
+
+                    <!-- timelines -->
+                    <div th:replace="components/timeline :: timeline">...</div>
+                </div>
+
+                <!--Spacer-->
+                <div class="mdl-cell mdl-cell--3-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
             </div>
 
         </main>
