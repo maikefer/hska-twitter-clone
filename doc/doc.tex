@@ -352,7 +352,76 @@ public class LoginViewController {
 	\end{lstlisting}
 
     % Aufgabe 3
-%    \chapter{Asynchrone Erweiterungen}
+    \chapter{Asynchrone Erweiterungen}
+    \section{Push-Funktionalität}
+    \subsection{Backend}
+	Das Backend der Anwendung hat einen STOMP Endpoint an \textbf{/ws} registriert. Ebenso wie einen Broker \textbf{/topic}, über welchen die Nachrichten verteilt werden.
+	
+	Im MessageController werden die ankommen Nachrichten an \textbf{/post} verarbeitet, in diesem Fall werden neue Posts gespeichert und direkt an alle über \textit{WebSockets} verbundene Clients verteilt, die \textbf{/topic/posts} abboniert haben.
+	
+	\begin{lstlisting}[language=java]
+@MessageMapping("/post")
+@SendTo("/topic/posts")
+public Post post(PostMessage postMessage) throws Exception {
+ // Create and save post
+ Post post = new Post(postMessage.getMessage(), postMessage.getUsername());
+ postRepository.savePost(post);
+ return post;
+}
+	\end{lstlisting}
+	
+	\subsection{Frontend}
+	Im Client werden neue Post nicht mehr wie gehabt über \textit{POST} an das Backend gesendet, sondern als \textit{JSON} über eine \textit{WebSocket} Verbindung.
+	
+	Bei Aufrufen der Views, mit ausnahme von \textbf{login} und \textbf{registration} wird versucht eine \textit{WebSocket} verbindung an \textbf{/ws} aufzubauen und \textbf{/topic/posts} wird abboniert. 
+	
+	Jede Nachricht, die über das Socket ankommt ist ein neuer Post. 
+	Befindet sich der User auf der \textbf{home} Seite, so wird der Post direkt in dessen Timeline eingefügt. Ist der User auf einer anderen View, so wird diesem eine Benachrichtigung angezeigt.
+	
+	Ist der Post von dem User, der es erstellt hat oder von einem User dem man folgt, so wird dieser auch in dessen \textbf{Privaten Timeline} eingebettet. 
+	
+	\begin{lstlisting}
+function connect() {
+ var hostname = window.location.hostname; 
+ var port = window.location.port;
+ var url = 'ws://' + hostname + ':' + port + '/ws';
 
+ stompClient = Stomp.client(url);
+ stompClient.debug = null; // Disable debug output
+ stompClient.connect({}, function (frame) {
+  console.log('Connected: ' + frame);
+  stompClient.subscribe('/topic/posts', function (post) {
+   postReceived(post)
+  });
+ });
+}
 
+function postReceived(post) {
+ var obj = JSON.parse(post.body);
+
+ if (path === '/') {
+  if (obj.user === currentUser) { // Append to global AND private timeline
+   appendPost(obj, true);
+  } else {
+   checkForFollower(obj)
+  }
+ } else if (path !== '/login' && path !== 'registration') {
+  showNotification(obj);
+ }
+}
+
+function checkForFollower(post) {
+ var uri = '/isfollower?username=' + currentUser + '&follower=' + post.user;
+
+ $.get(uri, function(response) {
+ if (response.isFollower)
+  appendPost(post, true);
+ else
+  appendPost(post);
+ });
+}
+	\end{lstlisting}
+ 	
+	\section{Redis Publish-Subscribe-Messaging}
+	
 \end{document}
