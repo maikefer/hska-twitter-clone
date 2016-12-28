@@ -28,6 +28,12 @@
         <div class="mdl-tabs__panel is-active" id="userTimeline">
             <div th:replace="components/timeline :: entryUser">...</div>
         </div>
+
+        <div th:value="${nextPageNo}" style="display:none" value="1">0</div>
+        <!--th:attr="display=#{displayPrev}"-->
+        <a th:href="@{|/users/${user.username}/previous/${nextPageNo}|}"> << previous</a>
+        <a th:href="@{|/users/${user.username}/${nextPageNo}|}"> next >> </a>
+
     </div>
 </div>
 

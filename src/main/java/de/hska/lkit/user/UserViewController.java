@@ -30,10 +30,15 @@ public class  UserViewController {
     @Autowired
     private PostRepository postRepository;
 
+    private final int postsPerPage = 5;
+
     @SuppressWarnings("Duplicates")
     @RequestMapping(value = "/users/{username}")
     public String showUser(@PathVariable("username") String username, Model model) {
+        return generatePagedUserProfil(username, model, 0);
+    }
 
+    private String generatePagedUserProfil(@PathVariable("username") String username, Model model, int pageNumber) {
         // Add current user
         User currentUser = userRepository.findUser(SessionSecurity.getName());
         model.addAttribute("currentUser", currentUser);
@@ -56,6 +61,17 @@ public class  UserViewController {
             model.addAttribute("isFollowing", false);
         }
 
+        model.addAttribute("nextPageNo", pageNumber + 1);
+
+        if (pageNumber == 0) {
+            // hide previous
+//            model.addAttribute("displayPrev", "none");
+        }
+        long maxPageNumber = postRepository.findPostsByUserSize(username) / postsPerPage;
+        if (pageNumber == maxPageNumber) {
+            // hide next
+        }
+
         // Follower
         Set<String> follower = userRepository.findFollowers(user.getUsername());
         Set<String> following = userRepository.findFollowing(user.getUsername());
@@ -64,14 +80,27 @@ public class  UserViewController {
         model.addAttribute("followingCnt", follower.size());
         model.addAttribute("followerCnt", following.size());
 
-        List<Post> userPosts = postRepository.findPostsByUser(user.getUsername());
-        model.addAttribute("PostListUser", userPosts);
+        int firstPost = pageNumber * postsPerPage;
+        int count = postsPerPage - 1;
+        List<Post> posts = postRepository.findPostsByUserPaged(username, firstPost, count);
+        model.addAttribute("PostListUser", posts);
 
         model.addAttribute("isSelf", SessionSecurity.getName().equals(user.getUsername()));
         return "user";
     }
 
-    @RequestMapping(value = { "/follow/{username}", "/follow/{username}/{user}/{tab}" })
+    @RequestMapping(value = "/users/{username}/{page}")
+    public String showUserOnPage(@PathVariable("username") String username, @PathVariable("page") int page, Model model) {
+        return generatePagedUserProfil(username, model, page);
+    }
+
+    @RequestMapping(value = "/users/{username}/previous/{page}")
+    public String previousPage(@PathVariable("username") String username, @PathVariable("page") int page, Model model) {
+//        return generatePagedUserProfile(username, model, page - 1);
+        return "redirect:/users/" + username + "/" + (page - 2);
+    }
+
+    @RequestMapping(value = {"/follow/{username}", "/follow/{username}/{user}/{tab}"})
     public String followUser(@PathVariable("username") String username, @PathVariable(value = "user", required = false) String user, @PathVariable(value = "tab", required = false) String tab) {
 
         // Get users
