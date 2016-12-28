@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import de.hska.lkit.redis.model.User;
@@ -31,23 +32,7 @@ public class UserRepositoryIT {
 		user.setEmail("tim@someotheremail.com");
 	}
 
-	@Test
-	public void basic() {
-		assertNotNull(this.userRepository);
-	}
-
-	@Test
-	public void createUser() {
-		assertEquals("Username should be still available", true, this.userRepository.isUsernameAvailable(this.user.getUsername()) );
-
-		long numUsersBefore = this.userRepository.numberOfUsers();
-		this.userRepository.saveUser(this.user);
-		long numUsersAfter = this.userRepository.numberOfUsers();
-
-		assertEquals("Number of users has increased", 1, numUsersAfter - numUsersBefore);
-
-		assertEquals("Username shouldn't be available anymore", false, this.userRepository.isUsernameAvailable(this.user.getUsername()) );
-	}
+	
 
 	@Test
 	public void findUser() {
@@ -63,24 +48,14 @@ public class UserRepositoryIT {
 	@Test
 	public void searchUser() {
 		createUser();
-		assertEquals("One user in DB", 1L, this.userRepository.numberOfUsers());
+		assertTrue("One user in DB", this.userRepository.numberOfUsers() > 0);
 		
-		Set<String> searchUser = this.userRepository.searchUser("test");
-		System.out.println("Found Users: ");
-		searchUser.forEach(System.out::println);
+		Set<String> searchUser = this.userRepository.searchUser(user.getUsername().substring(0, 8));
 		
 		assertEquals("One user found", 1, searchUser.size());
 		deleteUser();
 	}
 	
-	@Test
-	public void deleteUser() {
-		long numUsersBefore = this.userRepository.numberOfUsers();
-		this.userRepository.deleteUser(this.user);
-		long numUsersAfter = this.userRepository.numberOfUsers();
-
-		assertEquals("Number of users has decreased", -1, numUsersAfter - numUsersBefore);
-	}
 
 	@Test
 	public void followUser() {
@@ -98,4 +73,30 @@ public class UserRepositoryIT {
 		assertFalse("User2 is not a follower of User1", this.userRepository.isFollower(user2, user1));
 	}
 
+	
+	public void createUser() {
+		if(!this.userRepository.isUsernameAvailable(this.user.getUsername())) {
+			deleteUser();
+		}
+		assertEquals("Username should be still available", true, this.userRepository.isUsernameAvailable(this.user.getUsername()) );
+
+		long numUsersBefore = this.userRepository.numberOfUsers();
+		this.userRepository.saveUser(this.user);
+		long numUsersAfter = this.userRepository.numberOfUsers();
+
+		assertEquals("Number of users has increased", 1, numUsersAfter - numUsersBefore);
+
+		assertEquals("Username shouldn't be available anymore", false, this.userRepository.isUsernameAvailable(this.user.getUsername()) );
+				
+	}
+	
+
+	public void deleteUser() {
+		long numUsersBefore = this.userRepository.numberOfUsers();
+		this.userRepository.deleteUser(this.user);
+		long numUsersAfter = this.userRepository.numberOfUsers();
+
+		assertEquals("Number of users has decreased", -1, numUsersAfter - numUsersBefore);
+	}
+	
 }
