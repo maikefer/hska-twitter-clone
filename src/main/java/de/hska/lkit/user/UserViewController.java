@@ -61,6 +61,7 @@ public class  UserViewController {
             model.addAttribute("isFollowing", false);
         }
 
+        // pagination
         model.addAttribute("nextPageNo", pageNumber + 1);
 
         if (pageNumber == 0) {
@@ -78,6 +79,11 @@ public class  UserViewController {
             model.addAttribute("displayNext", "display:inline");
         }
 
+        int firstPost = pageNumber * postsPerPage;
+        int count = postsPerPage - 1;
+        List<Post> posts = postRepository.findPostsByUserPaged(username, firstPost, count);
+        model.addAttribute("PostListUser", posts);
+
         // Follower
         Set<String> follower = userRepository.findFollowers(user.getUsername());
         Set<String> following = userRepository.findFollowing(user.getUsername());
@@ -85,11 +91,6 @@ public class  UserViewController {
         // Follower Count
         model.addAttribute("followingCnt", follower.size());
         model.addAttribute("followerCnt", following.size());
-
-        int firstPost = pageNumber * postsPerPage;
-        int count = postsPerPage - 1;
-        List<Post> posts = postRepository.findPostsByUserPaged(username, firstPost, count);
-        model.addAttribute("PostListUser", posts);
 
         model.addAttribute("isSelf", SessionSecurity.getName().equals(user.getUsername()));
         return "user";
@@ -102,7 +103,6 @@ public class  UserViewController {
 
     @RequestMapping(value = "/users/{username}/previous/{page}")
     public String previousPage(@PathVariable("username") String username, @PathVariable("page") int page, Model model) {
-//        return generatePagedUserProfile(username, model, page - 1);
         return "redirect:/users/" + username + "/" + (page - 2);
     }
 

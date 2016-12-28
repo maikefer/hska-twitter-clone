@@ -4,16 +4,31 @@
 <div class="mdl-card mdl-shadow--2dp timeline-card" th:fragment="timeline">
     <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
         <div class="mdl-tabs__tab-bar">
-            <a href="#global" class="mdl-tabs__tab is-active">Global Timeline</a>
-            <a href="#private" class="mdl-tabs__tab">Private Timeline</a>
+            <a href="#global" th:attr="class=${classTabGlobal}">Global Timeline</a>
+            <a href="#private" th:attr="class=${classTabPrivate}">Private Timeline</a>
         </div>
 
-        <div class="mdl-tabs__panel is-active" id="global">
+        <div th:attr="class=${classPanelGlobal}" id="global">
             <div th:replace="components/timeline :: entryGlobal">...</div>
+
+            <div class="paginationNavigation">
+                <div th:value="${nextPageGlobalNo}" style="display:none" value="1">0</div>
+                <a th:attr="style=${displayPrevGlobal}" th:href="@{|/global/previous/${nextPageGlobalNo}|}"> &lt; previous</a>
+                &nbsp;
+                <a th:attr="style=${displayNextGlobal}" th:href="@{|/global/${nextPageGlobalNo}|}"> next &gt;</a>
+            </div>
+
         </div>
 
-        <div class="mdl-tabs__panel" id="private">
+        <div th:attr="class=${classPanelPrivate}" id="private">
             <div th:replace="components/timeline :: entryPrivate">...</div>
+
+            <div class="paginationNavigation">
+                <div th:value="${nextPagePrivateNo}" style="display:none" value="1">0</div>
+                <a th:attr="style=${displayPrevPrivate}" th:href="@{|/private/previous/${nextPagePrivateNo}|}"> &lt; previous</a>
+                &nbsp;
+                <a th:attr="style=${displayNextPrivate}" th:href="@{|/private/${nextPagePrivateNo}|}"> next &gt;</a>
+            </div>
         </div>
     </div>
 </div>
@@ -27,14 +42,16 @@
 
         <div class="mdl-tabs__panel is-active" id="userTimeline">
             <div th:replace="components/timeline :: entryUser">...</div>
+
+            <div class="paginationNavigation">
+                <div th:value="${nextPageNo}" style="display:none" value="1">0</div>
+                <a th:attr="style=${displayPrev}" th:href="@{|/users/${user.username}/previous/${nextPageNo}|}"> &lt; previous</a>
+                &nbsp;
+                <a th:attr="style=${displayNext}" th:href="@{|/users/${user.username}/${nextPageNo}|}"> next &gt;</a>
+            </div>
+
         </div>
 
-        <div class="paginationNavigation">
-            <div th:value="${nextPageNo}" style="display:none" value="1">0</div>
-            <a th:attr="style=${displayPrev}" th:href="@{|/users/${user.username}/previous/${nextPageNo}|}"> &lt; previous</a>
-            &nbsp;
-            <a th:attr="style=${displayNext}" th:href="@{|/users/${user.username}/${nextPageNo}|}"> next &gt;</a>
-        </div>
     </div>
 </div>
 
