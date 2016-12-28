@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Search Results</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link th:href="@{/webjars/material-design-lite/1.2.0/material.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main.css}" href="../static/css/main.css" rel="stylesheet"/>
+    <link th:href="@{/css/searchName.css}" href="../static/css/searchName.css" rel="stylesheet"/>
+</head>
+
+<body>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <!--navbar-->
+    <div th:replace="components/header :: header">...</div>
+
+    <!--main content-->
+    <main class="mdl-layout__content">
+        <div class="mdl-grid">
+            <!--Spacer-->
+            <div class="mdl-cell mdl-cell--1-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+
+            <!--Spacer-->
+            <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-col-phone">
+
+            </div>
+
+            <!--Main Content-->
+            <div id="timeline" class="mdl-cell mdl-cell--6-col mdl-cell--4-col-phone timeline mdl-card new-message-card">
+                <p style="text-align: center; font-size: 18px; margin-top: 15px;">
+                    <b>
+                    <span th:text="${amountResults}">10</span>
+                    </b>
+                    Users were found for
+                    <b>
+                    <span th:text="${search}">serachTerm</span>
+                    </b>!
+                </p>
+
+                <div th:replace="components/followers :: entryFollowing"> ... </div>
+            </div>
+
+            <!--Spacer-->
+            <div class="mdl-cell mdl-cell--3-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+        </div>
+    </main>
+</div>
+
+<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/material-design-lite/1.2.0/material.min.js}"></script>
+<script th:src="@{/webjars/stomp-websocket/2.3.3/stomp.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/searchName.js}"></script>
+</body>
+
+</html>

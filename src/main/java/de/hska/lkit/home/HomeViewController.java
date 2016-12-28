@@ -4,6 +4,7 @@ import de.hska.lkit.redis.model.Post;
 import de.hska.lkit.redis.model.User;
 import de.hska.lkit.redis.repo.PostRepository;
 import de.hska.lkit.redis.repo.UserRepository;
+import de.hska.lkit.search.SearchTerm;
 import de.hska.lkit.sessions.SessionSecurity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -80,6 +81,7 @@ public class HomeViewController {
 
         model.addAttribute("currentUser", user);
         model.addAttribute("isSelf", true);
+        model.addAttribute("searchTerm", new SearchTerm());
 
         // Pagination Global
         model.addAttribute("nextPageGlobalNo", pageGlobal + 1);

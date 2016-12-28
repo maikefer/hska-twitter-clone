@@ -5,12 +5,16 @@
     <div class="mdl-layout__header-row">
         <a th:href="@{/}" title="Home"><i class="material-icons">home</i></a>
         <div class="mdl-layout-spacer"></div>
+
+        <!-- Search -->
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
-            <label class="mdl-button mdl-js-button mdl-button--icon" for="fixed-header-drawer-exp">
+            <label class="mdl-button mdl-js-button mdl-button--icon" for="searchName">
                 <i class="material-icons">search</i>
             </label>
             <div class="mdl-textfield__expandable-holder">
-                <input class="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp" />
+                <form action="#" th:action ="@{/search}" th:object="${searchTerm}" method="post">
+                <input class="mdl-textfield__input" type="text" th:field="*{searchName}" id="searchName"/>
+                </form>
             </div>
         </div>
 
