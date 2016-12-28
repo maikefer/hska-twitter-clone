@@ -156,7 +156,7 @@ public class PostRepository {
 	 * Returns a subset of all Posts by the given user
 	 * @param username
 	 * @param start The start index, starts with 0
-	 * @param count The number of posts to return
+	 * @param count returns count + 1 posts. If there are less posts that the count, all posts will be returned.
 	 * @return A List of Post
 	 */
 	public List<Post> findPostsByUserPaged(String username, int start, int count) {
