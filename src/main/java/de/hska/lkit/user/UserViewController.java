@@ -30,7 +30,7 @@ public class  UserViewController {
     @Autowired
     private PostRepository postRepository;
 
-    private final int postsPerPage = 5;
+    private final int postsPerPage = 10;
 
     @SuppressWarnings("Duplicates")
     @RequestMapping(value = "/users/{username}")
@@ -65,11 +65,17 @@ public class  UserViewController {
 
         if (pageNumber == 0) {
             // hide previous
-//            model.addAttribute("displayPrev", "none");
+            model.addAttribute("displayPrev", "display:none");
+        } else {
+            model.addAttribute("displayPrev", "display:inline");
         }
+
         long maxPageNumber = postRepository.findPostsByUserSize(username) / postsPerPage;
         if (pageNumber == maxPageNumber) {
             // hide next
+            model.addAttribute("displayNext", "display:none");
+        } else {
+            model.addAttribute("displayNext", "display:inline");
         }
 
         // Follower
