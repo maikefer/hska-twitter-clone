@@ -44,15 +44,9 @@ public class MessageController {
         Post post = new Post(postMessage.getMessage(), postMessage.getUsername());
         postRepository.savePost(post);
         
+        //Save in ES for search operations
         EsPost esPost = new EsPost(post);
-        esPostRepo.save(esPost);
-        
-        
-        logger.info("findAll()");
-        esPostRepo.findAll().forEach( p -> logger.info(p.toString()) );
-        
-        logger.info("findByMessageLike(\"es\")");
-        esPostRepo.findByMessageLike("es").forEach( p -> logger.info(p.toString()) );
+        esPostRepo.save(esPost);        
         return post;
     }
 

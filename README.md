@@ -19,5 +19,8 @@ docker-compose up
 
 ![Screenshot of HAProxy stats and docker-compose logs](doc/images/haproxy.png)
 
+## Wildcard Search
+![Screenshot of Search results](doc/images/search_wildcard.png)
+
   
   

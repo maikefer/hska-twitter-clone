@@ -126,6 +126,7 @@ public class UserRepository {
 
 	
 	/**
+	 * Returns a list of users who starts with the given prefix
 	 * {@link http://stackoverflow.com/a/33865770/7043300}
 	 * @param usernamePrefix
 	 * @return
