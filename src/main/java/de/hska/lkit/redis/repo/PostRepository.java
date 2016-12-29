@@ -14,6 +14,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 import org.springframework.stereotype.Repository;
 
+import de.hska.lkit.elasticsearch.repo.ESPostRepository;
 import de.hska.lkit.redis.model.Post;
 
 @Repository
@@ -24,7 +25,7 @@ public class PostRepository {
 	private RedisTemplate<String, Post> redisPost;
 	private StringRedisTemplate redis;
 	private RedisAtomicLong postid;
-
+	
 	//Logger
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -64,6 +65,7 @@ public class PostRepository {
 		this.redis.opsForList().leftPush( KeyUtils.timeline(post.getUser()), id);
 
 		logger.info("Stored 'post:{}' of 'user:{}'", id, post.getUser());
+		
 	}
 
 	/**

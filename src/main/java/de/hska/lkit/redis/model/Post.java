@@ -13,7 +13,6 @@ public class Post implements Serializable {
 
     private String id;
     private LocalDateTime timestamp;
-    private String formattedTime;
     private String message;
     private String user;
 
@@ -107,7 +106,7 @@ public class Post implements Serializable {
 
     @Override
     public String toString() {
-        return "Post [id=" + id + ", timestamp=" + timestamp + ", message=" + message + ", user=" + user + "]";
+        return "Post [id=" + id + ", timestamp=" + timestamp + ", message=" + (message == null ? "null" : message.replace("\n", "\\n")) + ", user=" + user + "]";
     }
 
 }
