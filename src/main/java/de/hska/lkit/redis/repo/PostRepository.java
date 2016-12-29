@@ -2,7 +2,6 @@ package de.hska.lkit.redis.repo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
@@ -24,7 +23,7 @@ public class PostRepository {
 	private RedisTemplate<String, Post> redisPost;
 	private StringRedisTemplate redis;
 	private RedisAtomicLong postid;
-
+	
 	//Logger
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -64,6 +63,7 @@ public class PostRepository {
 		this.redis.opsForList().leftPush( KeyUtils.timeline(post.getUser()), id);
 
 		logger.info("Stored 'post:{}' of 'user:{}'", id, post.getUser());
+		
 	}
 
 	/**

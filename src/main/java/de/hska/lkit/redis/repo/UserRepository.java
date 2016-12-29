@@ -4,7 +4,6 @@ import static de.hska.lkit.redis.repo.KeyUtils.nextUserId;
 import static de.hska.lkit.redis.repo.KeyUtils.user;
 import static de.hska.lkit.redis.repo.KeyUtils.userAll;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -19,7 +18,6 @@ import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 import org.springframework.stereotype.Repository;
 
 import de.hska.lkit.redis.model.User;
-import redis.clients.jedis.Jedis;
 
 
 
@@ -128,6 +126,7 @@ public class UserRepository {
 
 	
 	/**
+	 * Returns a list of users who starts with the given prefix
 	 * {@link http://stackoverflow.com/a/33865770/7043300}
 	 * @param usernamePrefix
 	 * @return

@@ -79,3 +79,4 @@ doc.pdf
 *.jar
 *.war
 
+/data/

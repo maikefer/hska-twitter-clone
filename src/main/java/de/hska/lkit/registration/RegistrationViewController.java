@@ -1,5 +1,7 @@
 package de.hska.lkit.registration;
 
+import de.hska.lkit.elasticsearch.model.EsUser;
+import de.hska.lkit.elasticsearch.repo.ESUserRepository;
 import de.hska.lkit.redis.model.User;
 import de.hska.lkit.redis.repo.UserRepository;
 import de.hska.lkit.sessions.LoginController;
@@ -22,6 +24,9 @@ public class RegistrationViewController {
 
     @Autowired
     private UserRepository userRepo;
+    
+    @Autowired
+    private ESUserRepository esUserRepository;
 
     @Autowired
     private LoginController loginController;
@@ -57,6 +62,7 @@ public class RegistrationViewController {
         }
 
         userRepo.saveUser(userForm);
+        esUserRepository.save(new EsUser(userForm));
         loginController.login(userForm, response);
         return "redirect:/"; // redirect to home page
     }
