@@ -2,7 +2,6 @@ package de.hska.lkit.redis.repo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
@@ -14,7 +13,6 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 import org.springframework.stereotype.Repository;
 
-import de.hska.lkit.elasticsearch.repo.ESPostRepository;
 import de.hska.lkit.redis.model.Post;
 
 @Repository

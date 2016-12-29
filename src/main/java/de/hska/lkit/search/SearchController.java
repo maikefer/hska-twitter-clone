@@ -1,9 +1,9 @@
 package de.hska.lkit.search;
 
-import de.hska.lkit.redis.model.User;
-import de.hska.lkit.redis.repo.UserRepository;
-import de.hska.lkit.sessions.SessionSecurity;
-import de.hska.lkit.user.Follower;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +11,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import de.hska.lkit.redis.model.User;
+import de.hska.lkit.redis.repo.UserRepository;
+import de.hska.lkit.sessions.SessionSecurity;
+import de.hska.lkit.user.Follower;
 
 /**
  * Created by Maike on 12.12.2016.
