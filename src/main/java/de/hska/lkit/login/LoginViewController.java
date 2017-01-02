@@ -1,9 +1,11 @@
 package de.hska.lkit.login;
 
-import de.hska.lkit.redis.model.Post;
-import de.hska.lkit.redis.model.User;
-import de.hska.lkit.redis.repo.PostRepository;
-import de.hska.lkit.sessions.LoginController;
+import static java.lang.Math.min;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +13,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-import static java.lang.Math.min;
+import de.hska.lkit.redis.model.Post;
+import de.hska.lkit.redis.model.User;
+import de.hska.lkit.redis.repo.PostRepository;
+import de.hska.lkit.sessions.LoginController;
 
 /**
  * Created by bob on 20/10/2016.

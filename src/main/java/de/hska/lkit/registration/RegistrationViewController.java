@@ -1,10 +1,7 @@
 package de.hska.lkit.registration;
 
-import de.hska.lkit.elasticsearch.model.EsUser;
-import de.hska.lkit.elasticsearch.repo.ESUserRepository;
-import de.hska.lkit.redis.model.User;
-import de.hska.lkit.redis.repo.UserRepository;
-import de.hska.lkit.sessions.LoginController;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +9,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpServletResponse;
+import de.hska.lkit.elasticsearch.model.EsUser;
+import de.hska.lkit.elasticsearch.repo.ESUserRepository;
+import de.hska.lkit.redis.model.User;
+import de.hska.lkit.redis.repo.UserRepository;
+import de.hska.lkit.sessions.LoginController;
 
 
 /**
