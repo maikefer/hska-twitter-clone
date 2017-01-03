@@ -32,7 +32,7 @@ public class  UserViewController {
     @Autowired
     private PostRepository postRepository;
 
-    private final int postsPerPage = 10;
+    private final int postsPerPage = 6;
 
     @SuppressWarnings("Duplicates")
     @RequestMapping(value = "/users/{username}")
@@ -73,8 +73,9 @@ public class  UserViewController {
             model.addAttribute("displayPrev", "display:inline");
         }
 
-        long maxPageNumber = postRepository.findPostsByUserSize(username) / postsPerPage;
-        if (pageNumber == maxPageNumber) {
+        Long amountPosts = postRepository.findPostsByUserSize(username);
+        long maxPageNumber = amountPosts / postsPerPage;
+        if (pageNumber == maxPageNumber || amountPosts == postsPerPage) {
             // hide next
             model.addAttribute("displayNext", "display:none");
         } else {
