@@ -22,36 +22,38 @@
             <!--Spacer-->
             <div class="mdl-cell mdl-cell--3-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
 
-            
 
             <!--Main Content-->
-            <div id="timeline" class="mdl-cell mdl-cell--6-col mdl-cell--9-col-tablet mdl-cell--12-col-phone timeline mdl-card new-message-card">
-            	<!-- Results: Users -->
-                <p style="text-align: center; font-size: 18px; margin-top: 15px;">
-                    <b>
-                    <span th:text="${amountResultsUsers}">10</span>
-                    </b>
-                    Users were found for
-                    <b>
-                    <span th:text="${search}">serachTerm</span>
-                    </b>!
-                </p>
+            <div id="timeline" class="mdl-cell mdl-cell--6-col mdl-cell--9-col-tablet mdl-cell--12-col-phone">
+                <div class="timeline mdl-card new-message-card" style="width:100%">
+                    <!-- Results: Users -->
+                    <p style="text-align: center; font-size: 18px; margin-top: 15px;">
+                        <b>
+                            <span th:text="${amountResultsUsers}">10</span>
+                        </b>
+                        Users were found for
+                        <b>
+                            <span th:text="${search}">serachTerm</span>
+                        </b>!
+                    </p>
 
-                <div th:replace="components/followers :: entryFollowing"> ... </div>
-                
-                
-                <!-- Results: Posts -->
-                 <p style="text-align: center; font-size: 18px; margin-top: 15px;">
-                    <b>
-                    <span th:text="${amountResultsPosts}">10</span>
-                    </b>
-                    Posts were found for
-                    <b>
-                    <span th:text="${search}">serachTerm</span>
-                    </b>!
-                </p>
+                    <div th:replace="components/followers :: entryFollowing"> ...</div>
+                </div>
+                <br/>
+                <div class="timeline mdl-card new-message-card" style="width:100%">
+                    <!-- Results: Posts -->
+                    <p style="text-align: center; font-size: 18px; margin-top: 15px;">
+                        <b>
+                            <span th:text="${amountResultsPosts}">10</span>
+                        </b>
+                        Posts were found for
+                        <b>
+                            <span th:text="${search}">serachTerm</span>
+                        </b>!
+                    </p>
 
-                <div th:replace="components/timeline :: entryGlobal"> ... </div>
+                <div th:replace="components/timeline :: entryGlobal"> ...</div>
+                </div>
             </div>
 
             <!--Spacer-->
