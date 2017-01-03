@@ -71,19 +71,31 @@ public class HomeViewController {
             model.addAttribute("classPanelPrivate", "mdl-tabs__panel is-active");
         }
 
-        // Get the current user
+        // Global Stuff to make it work
         User user = userRepository.findUser(SessionSecurity.getName());
         model.addAttribute("user", user);
+        model.addAttribute("currentUser", user);
+        model.addAttribute("isSelf", true);
+        model.addAttribute("searchTerm", new SearchTerm());
 
         // Followers Count
         model.addAttribute("followingCnt", userRepository.findFollowers(user.getUsername()).size());
         model.addAttribute("followerCnt", userRepository.findFollowing(user.getUsername()).size());
 
-        model.addAttribute("currentUser", user);
-        model.addAttribute("isSelf", true);
-        model.addAttribute("searchTerm", new SearchTerm());
 
         // Pagination Global
+        showGlobalPostsWithPagination(pageGlobal, model);
+
+        // Pagination Private
+        showPrivatePostsWithPagination(pagePrivate, model, user);
+
+        return "home";
+    }
+
+    private void showGlobalPostsWithPagination(int pageGlobal, Model model) {
+        if (pageGlobal == -1) {
+            pageGlobal = 0;
+        }
         model.addAttribute("nextPageGlobalNo", pageGlobal + 1);
         if (pageGlobal <= 0) {
             // hide previous
@@ -105,11 +117,13 @@ public class HomeViewController {
         int countGlobal = maxAmountPostsPerPage - 1;
         List<Post> globalPosts = postRepository.findAllPostsPaged(firstPostGlobal, countGlobal);
         model.addAttribute("PostListGlobal", globalPosts);
+    }
 
+    private void showPrivatePostsWithPagination(int pagePrivate, Model model, User user) {
         if (pagePrivate == -1) {
             pagePrivate = 0;
         }
-        // Pagination Private
+
         model.addAttribute("nextPagePrivateNo", pagePrivate + 1);
         if (pagePrivate == 0) {
             // hide previous
@@ -131,8 +145,6 @@ public class HomeViewController {
         int countPrivate = maxAmountPostsPerPage - 1;
         List<Post> privatePosts = postRepository.timelineOfUserPaged(user.getUsername(), firstPostPrivate, countPrivate);
         model.addAttribute("PostListPrivate", privatePosts);
-
-        return "home";
     }
 
 }
