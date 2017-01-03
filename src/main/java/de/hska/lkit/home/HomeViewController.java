@@ -85,7 +85,7 @@ public class HomeViewController {
 
         // Pagination Global
         model.addAttribute("nextPageGlobalNo", pageGlobal + 1);
-        if (pageGlobal == 0) {
+        if (pageGlobal <= 0) {
             // hide previous
             model.addAttribute("displayPrevGlobal", "display:none");
         } else {
@@ -94,7 +94,7 @@ public class HomeViewController {
 
         Long amountPostsGlobal = postRepository.findAllPostsSize();
         long maxPageNumberGlobal = amountPostsGlobal / maxAmountPostsPerPage;
-        if (pageGlobal == maxPageNumberGlobal) {
+        if (pageGlobal == maxPageNumberGlobal || amountPostsGlobal == maxAmountPostsPerPage) {
             // hide next
             model.addAttribute("displayNextGlobal", "display:none");
         } else {
@@ -120,7 +120,7 @@ public class HomeViewController {
 
         Long amountPostsPrivate = postRepository.timelineOfUserSize(user.getUsername());
         long maxPageNumberPrivate = amountPostsPrivate / maxAmountPostsPerPage;
-        if (pagePrivate == maxPageNumberPrivate) {
+        if (pagePrivate == maxPageNumberPrivate || amountPostsPrivate == maxAmountPostsPerPage) {
             // hide next
             model.addAttribute("displayNextPrivate", "display:none");
         } else {
