@@ -1,7 +1,6 @@
 package de.hska.lkit.pubsub;
 
 import de.hska.lkit.redis.model.Post;
-import org.codehaus.groovy.runtime.callsite.PogoMetaMethodSite;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
