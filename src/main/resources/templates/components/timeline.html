@@ -60,7 +60,7 @@
         <li th:each="post : ${PostListGlobal}" class="mdl-list__item mdl-list__item--two-line"
             style="padding-right: 10px;">
             <span class="mdl-list__item-primary-content">
-                <a th:href="@{/users/${post.user}}">
+                <a th:href="@{|/users/${post.user}|}">
                     <i class="material-icons mdl-list__item-avatar">person</i>
                 </a>
                 <a th:href="@{|/users/${post.user}|}" class="timeline-entry-username"
@@ -82,7 +82,7 @@
         <li th:each="post : ${PostListPrivate}" class="mdl-list__item mdl-list__item--two-line"
             style="padding-right: 10px;">
             <span class="mdl-list__item-primary-content">
-                <a th:href="@{/users/${post.user}}">
+                <a th:href="@{|/users/${post.user}|}">
                     <i class="material-icons mdl-list__item-avatar">person</i>
                 </a>
                 <a th:href="@{|/users/${post.user}|}" class="timeline-entry-username"
@@ -104,7 +104,7 @@
         <li th:each="post : ${PostListUser}" class="mdl-list__item mdl-list__item--two-line"
             style="padding-right: 10px;">
             <span class="mdl-list__item-primary-content">
-                <a th:href="@{/users/${post.user}}">
+                <a th:href="@{|/users/${post.user}|}">
                     <i class="material-icons mdl-list__item-avatar">person</i>
                 </a>
                 <a th:href="@{|/users/${post.user}|}" class="timeline-entry-username" th:text="${post.user}">John Doe</a>
