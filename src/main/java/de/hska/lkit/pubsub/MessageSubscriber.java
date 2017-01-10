@@ -42,9 +42,8 @@ public class MessageSubscriber implements MessageListener {
         }
     }
 
-    private void sendPost(Post post) throws Exception {
-        System.out.println("Sending to all clients");
-        this.template.convertAndSend("/topic/posts", post);
-    }
+        private void sendPost(Post post) throws Exception {
+            this.template.convertAndSend("/topic/posts", post);
+        }
 }
 
