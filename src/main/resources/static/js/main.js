@@ -17,7 +17,7 @@ $(function() {
   path = window.location.pathname;
 
   // Get current user
-  if (path !== '/login' && path !== '/registration') // No user on /login and /registration
+  if (path !== '/search' && path !== '/login' && path !== '/registration') // No user on /search, /login and /registration
     currentUser = document.getElementById('profile-name').textContent;
 
   var $profile = $('#profile-header');
