@@ -1,10 +1,7 @@
 package de.hska.lkit.messages;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,23 +28,19 @@ public class MessageController {
 
     @Autowired
     private UserRepository userRepository;
-    
+
     @Autowired
-	private ESPostRepository esPostRepo;
-    
-    private Logger logger = LoggerFactory.getLogger(MessageController.class);
+    private ESPostRepository esPostRepo;
 
     @MessageMapping("/post")
-    @SendTo("/topic/posts")
-    public Post post(PostMessage postMessage) throws Exception {
+    public void post(PostMessage postMessage) throws Exception {
         // Create and save post
         Post post = new Post(postMessage.getMessage(), postMessage.getUsername());
         postRepository.savePost(post);
-        
+
         //Save in ES for search operations
         EsPost esPost = new EsPost(post);
-        esPostRepo.save(esPost);        
-        return post;
+        esPostRepo.save(esPost);
     }
 
     @RequestMapping(value = "/isfollower", method = RequestMethod.GET, produces = "application/json", params = { "username", "follower" })

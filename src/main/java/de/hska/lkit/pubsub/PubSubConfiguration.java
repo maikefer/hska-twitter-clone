@@ -9,6 +9,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 
 /**
  * Created by Timo on 10.01.2017.
@@ -24,9 +25,16 @@ public class PubSubConfiguration {
     @Autowired
     RedisTemplate<String, Post> redisPostTemplate;
 
+    SimpMessagingTemplate template;
+
+    @Autowired
+    public PubSubConfiguration(SimpMessagingTemplate template) {
+        this.template = template;
+    }
+
     @Bean
     MessageListenerAdapter messageListener() {
-        return new MessageListenerAdapter(new MessageSubscriber());
+        return new MessageListenerAdapter(new MessageSubscriber(this.template));
     }
 
     @Bean
