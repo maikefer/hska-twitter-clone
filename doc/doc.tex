@@ -423,5 +423,91 @@ function checkForFollower(post) {
 	\end{lstlisting}
  	
 	\section{Redis Publish-Subscribe-Messaging}
+	Das Publish-Subscribe Messaging sorgt für eine systemweite Benachrichtigung bei neuen Posts, sodass mehrere Serverinstanzen über einen neuen Post informiert werden können. 
+	Zunächst muss der Server für das Publish-Subscribe Pattern konfiguriert werden:
+	\begin{lstlisting}
+@Configuration
+public class PubSubConfiguration {
+
+ public static final String postChannelName = "updates:post";
+
+ @Autowired
+ RedisConnectionFactory redisConnectionFactory;
+
+ @Autowired
+ RedisTemplate<String, Post> redisPostTemplate;
+
+ @Bean
+ MessageListenerAdapter messageListener() {
+  return new MessageListenerAdapter(new MessageSubscriber());
+ }
+
+ @Bean
+ RedisMessageListenerContainer redisContainer() {
+  RedisMessageListenerContainer container
+    = new RedisMessageListenerContainer();
+  container.setConnectionFactory(redisConnectionFactory);
+  container.addMessageListener(messageListener(), topic());
+  return container;
+ }
+
+ @Bean
+ MessagePublisher redisPublisher() {
+  return new MessagePublisher(redisPostTemplate, topic());
+ }
+
+ @Bean
+ ChannelTopic topic() {
+  return new ChannelTopic(postChannelName);
+ }
+}
+	\end{lstlisting}
+	Die Konfiguration erstellt einen Publisher, der in dem Nachrichtenkanal \textit{updates:post} Nachrichten veröffentlicht. Die Implementierung des MessagePublishers veröffentlicht bei jedem Aufruf der \textit{publish(Post)} Funktion einen Post im Kanal \textit{updates:post}.
 	
+	\begin{lstlisting}
+public class MessagePublisher {
+
+ @Autowired
+ private RedisTemplate<String, Post> redisPostTemplate;
+
+ @Autowired
+ private ChannelTopic topic;
+
+ public MessagePublisher() {
+
+ }
+
+ public MessagePublisher(RedisTemplate<String, Post> template, ChannelTopic topic) {
+  redisPostTemplate = template;
+  this.topic = topic; 
+ }
+
+ public void publish(Post post){
+  redisPostTemplate.convertAndSend(topic.getTopic(), post);
+ }
+}
+	\end{lstlisting}
+	Ein Subscriber kann nun den Kanal abonnieren, um die Benachrichtigungen des \textit{MessagePublisher} zu erhalten. Eine Beispielhafte Implementierung eines Subscribers wäre:
+	\begin{lstlisting}
+@Service
+public class MessageSubscriber implements MessageListener {
+
+ public static Stack<Post> recentPosts = new Stack<>();
+
+ private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+ public void onMessage(Message message, byte[] pattern) {
+  try {
+   ByteArrayInputStream bis = new ByteArrayInputStream(message.getBody());
+   ObjectInputStream ois = new ObjectInputStream(bis);
+   Post post = (Post) ois.readObject();
+   recentPosts.push(post);
+   logger.info("received post: " + post.toString());
+  } catch (Exception e) {
+   logger.error("can't convert message to Post, message: " + message.toString());
+  }
+ }
+}
+	\end{lstlisting}
+	Dieser Subscriber deserialisiert die Nachricht und konvertiert sie in ein Objekt vom Typ \textit{Post}. Anschließend legt er den Post auf einen Stack, welcher die neuesten Nachrichten beinhaltet. 
 \end{document}
