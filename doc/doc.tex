@@ -503,6 +503,9 @@ public class MessageSubscriber implements MessageListener {
    Post post = (Post) ois.readObject();
    recentPosts.push(post);
    logger.info("received post: " + post.toString());
+   
+   // Send to all clients
+   this.sendPost(Post);
   } catch (Exception e) {
    logger.error("can't convert message to Post, message: " + message.toString());
   }
@@ -510,4 +513,11 @@ public class MessageSubscriber implements MessageListener {
 }
 	\end{lstlisting}
 	Dieser Subscriber deserialisiert die Nachricht und konvertiert sie in ein Objekt vom Typ \textit{Post}. Anschließend legt er den Post auf einen Stack, welcher die neuesten Nachrichten beinhaltet. 
+	
+	Anschließen werden die neuen Posts an alle verbunden Clients gesendet.
+	\begin{lstlisting}
+private void sendPost(Post post) throws Exception {
+ this.template.convertAndSend("/topic/posts", post);
+}
+	\end{lstlisting}
 \end{document}
