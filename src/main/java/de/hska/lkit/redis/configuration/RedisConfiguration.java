@@ -14,7 +14,8 @@ import redis.clients.jedis.JedisPoolConfig;
 
 @Configuration
 public class RedisConfiguration {
-	@Bean
+
+	@Bean(name = "redisConnectionFactory")
 	public RedisConnectionFactory getConnectionFactory() {
 		String redisHost = System.getenv().getOrDefault("REDIS_HOST", "localhost");
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import de.hska.lkit.pubsub.MessagePublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +24,17 @@ public class PostRepository {
 	private RedisTemplate<String, Post> redisPost;
 	private StringRedisTemplate redis;
 	private RedisAtomicLong postid;
-	
+	private MessagePublisher messagePublisher;
+
 	//Logger
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	public PostRepository(RedisTemplate<String, Post> redisPost, StringRedisTemplate stringRedisTemplate, UserRepository userRepository) {
+	public PostRepository(RedisTemplate<String, Post> redisPost, StringRedisTemplate stringRedisTemplate, UserRepository userRepository, MessagePublisher messagePublisher) {
 		this.redisPost = redisPost;
 		this.redis = stringRedisTemplate;
 		this.userRepository = userRepository;
+		this.messagePublisher = messagePublisher;
 	}
 
 	@PostConstruct
@@ -61,9 +64,10 @@ public class PostRepository {
 			this.redis.opsForList().leftPush( KeyUtils.timeline(follower), id);
 		}
 		this.redis.opsForList().leftPush( KeyUtils.timeline(post.getUser()), id);
+        messagePublisher.publish(post);
 
 		logger.info("Stored 'post:{}' of 'user:{}'", id, post.getUser());
-		
+
 	}
 
 	/**
