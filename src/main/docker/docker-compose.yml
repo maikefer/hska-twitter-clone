@@ -4,14 +4,18 @@ services:
     image: hska/twitter-spring
     depends_on:
       - redis
+      - elasticsearch
     environment:
       - REDIS_HOST=redis
+      - ES_HOST=elasticsearch
   spring_2:
     image: hska/twitter-spring
     depends_on:
       - redis
+      - elasticsearch
     environment:
       - REDIS_HOST=redis
+      - ES_HOST=elasticsearch
   haproxy:
     image: hska/haproxy
     ports:
@@ -22,4 +26,8 @@ services:
       - spring_2
   redis:
     image: redis
+  elasticsearch:
+    image: elasticsearch:2
+    environment:
+      - vm.max_map_count=262144
 

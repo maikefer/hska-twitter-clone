@@ -11,7 +11,11 @@ import de.hska.lkit.elasticsearch.model.EsPost;
 
 public interface ESPostRepository extends ElasticsearchRepository<EsPost, String>{
 
-	//@Query("{\"bool\" : {\"must\" : {\"field\" : {\"message\" : {\"query\" : \"*?*\",\"analyze_wildcard\" : true}}}}}")
+	/**
+	 * 
+	 * @param message
+	 * @return
+	 */
 	List<EsPost> findByMessageLike(String message);
 	
 }

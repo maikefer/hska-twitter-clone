@@ -19,8 +19,6 @@ public interface ESUserRepository extends ElasticsearchRepository<EsUser, String
 	 * @param username
 	 * @return
 	 */
-	//@Query("{\"bool\" : {\"must\" : {\"field\" : {\"username\" : {\"query\" : \"?*\",\"analyze_wildcard\" : true}}}}}")
-	//@Query("{\"query\": {   \"match_phrase\": {\"username\": \"?\"}}}")
 	List<EsUser> findByUsernameLike(String username);
 	
 }
