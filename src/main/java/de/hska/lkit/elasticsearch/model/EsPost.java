@@ -10,12 +10,12 @@ public class EsPost{
 	private String id;
 	private String message;
 
-	public EsPost() {	
+	public EsPost() {
 	}
-	
+
 	public EsPost(Post post) {
 		this.id = post.getId();
-		this.message = post.getMessage();
+		this.message = post.getMessage().toLowerCase();
 	}
 
 	/**
